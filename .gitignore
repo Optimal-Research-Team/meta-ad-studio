@@ -1,0 +1,16 @@
+# footage, analysis and renders never leave the Mac
+inbox/
+work/
+out/
+*.mov
+*.mp4
+*.m4a
+*.wav
+
+# licensed music (Fionnlagh - Built Upon a Path) — not redistributable
+brand/audio/
+
+tools/node_modules/
+__pycache__/
+*.pyc
+.DS_Store
