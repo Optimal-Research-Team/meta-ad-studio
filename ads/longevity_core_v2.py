@@ -47,3 +47,12 @@ TAGS = [  # chapter chips (top of frame) over these segments
 ]
 END_DUR = 3.2
 THUMB_AT = 1.0
+COVER = dict(lines=[[("3 things to know", False)], [("before you book.", True)]])    # Instagram cover headline
+COVER_AT = 1.5    # source s: standing in the lounge before the first word
+
+# Organic Instagram: Tight only, 9:16 only, keyword end card.  python3 studio.py ads/longevity_core_v2.py --channel=ig
+CHANNELS = {
+    "ig": dict(VARIANTS={"Tight": VARIANTS["Tight"]}, RATIOS=("9x16",),
+               END=dict(sub=["Comment LONGEVITY and we\u2019ll", "send you the details."],
+                        cta="Comment LONGEVITY", url="@beoptimal.ca  \u00b7  Barrie, ON")),
+}

@@ -1,9 +1,10 @@
 # Video ads, Oct 12, 2026: Meta ads + Instagram
 
-There are two ads, both shot with Cheryl Cairns (care coordinator) in the clinic lounge:
+There are three ads, all shot with Cheryl Cairns (care coordinator) at the clinic:
 
 | ID | Ad | Meta ad cuts | Instagram reel |
 |---|---|---|---|
+| **LV1** | Longevity, "3 things to know before you book." | Tight 35.3 s, Full 42.8 s | Tight, 35.3 s |
 | **LV2** | Longevity, "A full hour. Every year." | Tight 36.5 s, Full 39.0 s | Tight, 36.5 s |
 | **MV1** | Menopause, "I just don't feel like myself." | Tight 33.8 s, Full 42.2 s | Tight, 33.8 s |
 
@@ -20,7 +21,7 @@ Re-render: `python3 studio.py ads/longevity_ad2_full_hour.py` (Meta, both cuts) 
 | | LV2 Longevity | MV1 Menopause |
 |---|---|---|
 | Ad set | The Longevity membership ad set (alongside L1–L6 / LB1–LB6) | The Menopause ad set (alongside M1–M6 / MB1–MB6) |
-| Ad names | `LV2-T`, `LV2-F` | `MV1-T`, `MV1-F` |
+| Ad names | `LV1-T`, `LV1-F`, `LV2-T`, `LV2-F` | `MV1-T`, `MV1-F` |
 | Destination | `https://www.beoptimal.ca/membership` | `https://www.beoptimal.ca/services/menopause-and-perimenopause-care` |
 | URL parameters | `utm_source=meta&utm_medium=paid&utm_campaign=opt-b-q4&utm_content={{ad.name}}` | `utm_source=meta&utm_medium=paid&utm_campaign=opt-a-q4&utm_content={{ad.name}}` |
 | CTA button | Book now | Book now |
@@ -30,6 +31,22 @@ Re-render: `python3 studio.py ads/longevity_ad2_full_hour.py` (Meta, both cuts) 
 - **Thumbnail:** use the matching `thumbnail` jpg. It is the hook frame.
 - **Captions:** they are burned in, so leave Meta's auto-generated captions **off** or they'll double up. The `.srt` is only needed if you ever turn them on.
 - **Testing the two cuts:** run Tight and Full as separate ads in the same ad set and let Meta allocate the spend. Judge after 7 days on cost per landing-page view and on ThruPlays.
+
+### LV1 · Longevity · "3 things to know before you book."
+
+**Primary text (short)**
+Three things to know before you book, from Cheryl, our care coordinator. Book a free 15-minute intro call.
+
+**Primary text (long)**
+Three things to know before you book, from Cheryl, our care coordinator:
+
+1. Every member gets a 60-minute annual longevity assessment with their Nurse Practitioner, including comprehensive bloodwork.
+2. Thorough, unrushed appointments.
+3. Faster appointment times, so you're seen when you need to be.
+
+$1,495 a year, everything included. Book a free 15-minute intro call.
+
+**Headline:** 3 things to know before you book · **Description:** $1,495/yr, all included
 
 ### LV2 · Longevity · "A full hour. Every year."
 
@@ -72,6 +89,17 @@ On Instagram every video now posts as a Reel. It plays in the Reels tab and in f
 4. Paste `caption.txt`.
 5. Leave **Share to Facebook** off for now, as with the rest of the grid.
 6. Don't add Instagram music. The reel already has the quiet brand bed under the voice.
+
+### LV1 caption
+Three things to know before you book, from Cheryl, our care coordinator.
+
+1. Every member gets a 60-minute annual longevity assessment with their nurse practitioner, including comprehensive bloodwork.
+2. Thorough, unrushed appointments.
+3. Faster appointment times, so you're seen when you need to be.
+
+Comment LONGEVITY and we'll send you the details.
+
+#Barrie #BarrieOntario #SimcoeCounty #longevity #preventivehealth #healthspan
 
 ### LV2 caption
 When's the last time anyone spent a full hour on your health?

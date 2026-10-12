@@ -16,6 +16,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 FP = os.path.join(ROOT, "tools/node_modules/ffprobe-static/bin/darwin/arm64/ffprobe")
 
 ROUND = [  # ID, title, output folder, spec NAME
+    ("LV1", "Longevity - 3 things to know", "out/longevity-core-v2", "LongevityCore"),
     ("LV2", "Longevity - A full hour", "out/longevity-ad2", "LongevityFullHour"),
     ("MV1", "Menopause - I don't feel like myself", "out/menopause-ad1", "MenopauseMyself"),
 ]
