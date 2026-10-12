@@ -78,3 +78,12 @@ See `ads/longevity_core_v2.py` for a full example (walk-and-talk, two variants).
 - Use `*_thumb.jpg` as the cover: it is the hook frame.
 - Health ads: keep copy free of personal-attribute phrasing ("Are you struggling with…"); the studio flags lines like that when proposing a cut.
 
+
+## Static ads (`static/`)
+
+Branded Meta statics, built with the same tokens as the Instagram relaunch (Castoro + Public Sans, forest/cream/sage, engraved plates).
+
+- `static/content.js`: one entry per ad (copy, facts, layout type). `*word*` gives an italic accent and `[[word]]` a hand-drawn ring.
+- `static/ads.html`: the layouts (symptoms, stat, price, photo, steps, ledger, venn, week, inbody, plate). Each one renders at 4:5 (1080×1350) and 9:16 (1080×1920).
+- `python3 static/render.py [IDs]`: Playwright renders to `static/out/<meno|long>/` and writes `_sheet.jpg`. The render fails if text leaves the frame or, on 9:16, the Reels safe zone (top 269 / bottom 672 / sides 65 px).
+- `static/COPY.md`: primary text, headlines, URLs and campaign setup, plus the compliance guardrails (Meta personal attributes, CNO testimonials and comparisons, verifiable claims, no Rx drug names).
