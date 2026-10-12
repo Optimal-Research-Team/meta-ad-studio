@@ -56,3 +56,13 @@ END = dict(eyebrow="MENOPAUSE & PERIMENOPAUSE CARE", headline=["You deserve", "t
            cta="Book a free intro call  →")
 END_DUR = 3.2
 THUMB_AT = 1.0
+COVER = dict(lines=[[("\u201cI just don\u2019t feel", False)], [("like myself.", True), ("\u201d", False)]])    # Instagram cover headline (reel-cover style)
+COVER_AT = 0.5    # source s: a clean frame before the first word, for the Instagram cover
+
+# Organic Instagram: same edit, Tight only, 9:16 only. The end card swaps the (untappable) Book button for the
+# keyword that triggers the Meta Business Suite auto-DM.  python3 studio.py ads/menopause_ad1_myself.py --channel=ig
+CHANNELS = {
+    "ig": dict(VARIANTS={"Tight": VARIANTS["Tight"]}, RATIOS=("9x16",),
+               END=dict(END, sub=["Comment MENOPAUSE and we\u2019ll", "send you the details."],
+                        cta="Comment MENOPAUSE", url="@beoptimal.ca  \u00b7  Barrie, ON")),
+}

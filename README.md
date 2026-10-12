@@ -11,7 +11,11 @@ Everything runs locally: no footage leaves the Mac unless a Higgsfield step is e
    (`ocr.py`, Apple Vision) → face track (`vision.py`) → silences + loudness.
 3. **Propose the cut** as an ad spec in `ads/<ad>.py`: segments with punch-ins, caption fixes, hook, point tags.
 4. **Render** `python3 studio.py ads/<ad>.py [Variant] [--audio]` → `out/<ad>/`.
+   Organic Instagram: `--channel=ig` renders the spec's `CHANNELS["ig"]` overrides (keyword end card, 9:16 only) and
+   `--channel=ig --cover` makes the grid cover (reel-cover style, film grain, 3:4 crop preview).
 5. **Review + tweak**: edit the spec and re-render (no credits). `--audio` rebuilds only the voice track.
+6. **Package** `python3 package.py "<folder>"` → labelled `META ADS/` and `INSTAGRAM (organic)/` hand-off folders with
+   copy from `VIDEO-ADS.md` (primary text, headlines, UTMs, IG captions, posting steps).
 
 ## What `studio.py` does per variant
 
@@ -70,6 +74,8 @@ and `silences.json`); the pipeline maps everything onto the output timeline.
 | `END` | End-card copy: `eyebrow`, `headline` (lines, `*italic*`), `sub`, `cta`, `url`; omitted keys fall back to the longevity card |
 | `GRADE` | Optional ffmpeg RGB filter chain replacing the default warm grade |
 | `END_DUR`, `THUMB_AT` | End-card hold (s), thumbnail time (s) |
+| `CHANNELS` | Per-channel overrides, e.g. `{"ig": dict(END=..., VARIANTS=..., RATIOS=("9x16",))}`; output names get `_IG` |
+| `COVER`, `COVER_AT` | Instagram cover headline runs and the source time of the clean cover frame |
 
 Examples:
 - `ads/longevity_core_v2.py`: walk-and-talk, three numbered points, two variants.

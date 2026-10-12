@@ -369,13 +369,17 @@ def render(spec, variant):
     bg916, lay916 = G.endcard(W, H, 350, getattr(spec, "END", None))
     bg45, lay45 = G.endcard(W, H45, None, getattr(spec, "END", None))
 
+    ratios = getattr(spec, "RATIOS", ("9x16", "4x5"))
     v916, v45 = os.path.join(out_dir, f".{tag}_9x16.mp4"), os.path.join(out_dir, f".{tag}_4x5.mp4")
-    e916, e45 = encoder(v916, W, H), encoder(v45, W, H45)
+    e916 = encoder(v916, W, H)
+    e45 = encoder(v45, W, H45) if "4x5" in ratios else None
     n, thumbs = 0, {}
 
     def emit(fr, f45):
         nonlocal n
-        e916.stdin.write(fr.tobytes()); e45.stdin.write(f45.tobytes())
+        e916.stdin.write(fr.tobytes())
+        if e45:
+            e45.stdin.write(f45.tobytes())
         n += 1
 
     for g in segs:
@@ -400,13 +404,17 @@ def render(spec, variant):
         tau = XFADE_END + k / FPS
         emit(G.endcard_frame(None, bg916, lay916, tau, XFADE_END), G.endcard_frame(None, bg45, lay45, tau, XFADE_END))
     for e in (e916, e45):
-        e.stdin.close(); e.wait()
+        if e:
+            e.stdin.close(); e.wait()
 
     total = n / FPS
     apath = os.path.join(work, f"{tag}.wav")
     audio(src, segs, body, total, apath, music_path(spec))
     mux(v916, apath, os.path.join(out_dir, f"{tag}_9x16.mp4"))
-    mux(v45, apath, os.path.join(out_dir, f"{tag}_4x5.mp4"))
+    if e45:
+        mux(v45, apath, os.path.join(out_dir, f"{tag}_4x5.mp4"))
+    else:
+        thumbs.pop("4x5", None)
     for k, im in thumbs.items():
         im.save(os.path.join(out_dir if k != "qa" else work, f"{tag}_{k}_thumb.jpg"), quality=92)
     print(f"{tag}: {n} frames = {total:.2f}s  (body {body:.2f}s + end {spec.END_DUR}s), 4:5 window {win45}, "
@@ -421,7 +429,7 @@ def remix(spec, variant):
     tag = f"{spec.NAME}_{variant}"
     apath = os.path.join(work, f"{tag}.wav")
     audio(src, segs, body, body + round(spec.END_DUR * FPS) / FPS, apath, music_path(spec))
-    for ratio in ("9x16", "4x5"):
+    for ratio in getattr(spec, "RATIOS", ("9x16", "4x5")):
         final = os.path.join(out_dir, f"{tag}_{ratio}.mp4")
         tmp = os.path.join(out_dir, f".{tag}_{ratio}.mp4")
         run([FF, "-y", "-v", "error", "-i", final, "-map", "0:v", "-c", "copy", tmp])
@@ -431,7 +439,7 @@ def remix(spec, variant):
 
 def qa(spec, tag):
     out_dir, work = os.path.join(ROOT, spec.OUT), os.path.join(ROOT, spec.WORK)
-    for ratio in ("9x16", "4x5"):
+    for ratio in getattr(spec, "RATIOS", ("9x16", "4x5")):
         f = os.path.join(out_dir, f"{tag}_{ratio}.mp4")
         d = json.loads(run([FP, "-v", "error", "-show_streams", "-show_format", "-of", "json", f]).stdout)
         v = next(s for s in d["streams"] if s["codec_type"] == "video")
@@ -448,9 +456,71 @@ def qa(spec, tag):
              "-frames:v", "1", "-q:v", "3", os.path.join(work, f"{tag}_{ratio}_sheet.jpg")])
 
 
+GRAIN_TILE = os.path.join(ROOT, "brand/textures/grain-1024.png")
+
+
+def grain(img, strength=0.28):
+    """Mild monochrome film grain, same tile and strength as the Instagram grid (optimal-instagram/build)."""
+    import numpy as np
+    tile = np.asarray(Image.open(GRAIN_TILE).convert("L"), dtype=np.float32) / 255.0
+    w, h = img.size
+    n = np.tile(tile, (h // tile.shape[0] + 1, w // tile.shape[1] + 1))[:h, :w] - 0.5
+    rgb = np.asarray(img.convert("RGB"), dtype=np.float32) / 255.0
+    return Image.fromarray((np.clip(rgb + n[..., None] * strength, 0, 1) * 255).astype(np.uint8))
+
+
+def cover(spec):
+    """Instagram cover in the grid's reel-cover style (optimal-instagram pack, e.g. C4/C1): cream logo top-left,
+    solid forest panel in the lower third with a "REEL · m:ss" label and a Castoro headline, sage italic emphasis,
+    film grain. Saved at 1080x1920 plus a preview of the centre 3:4 crop the profile grid shows."""
+    from PIL import ImageDraw
+    src, out_dir = os.path.join(ROOT, spec.SRC), os.path.join(ROOT, spec.OUT)
+    p, track = probe(src), face_track(os.path.join(ROOT, spec.WORK))
+    t = spec.COVER_AT
+    g = dict(s=t, e=t + 1 / FPS, n=1, z=1.0)
+    fr = next(segment_frames(src, p, g, getattr(spec, "GRADE", DEFAULT_GRADE), seg_anchor(track, t - 1, t + 1)))
+    lg = G.logo("cream", 150)
+    fr.paste(lg, (118, 360), lg)
+    _, body = timeline(spec, next(iter(spec.VARIANTS)))
+    secs = round(body + spec.END_DUR)
+    label = f"REEL \u00b7 {secs // 60}:{secs % 60:02}"
+    size, lh, x0, y0 = 96, 100, 118, 1150
+    mint = (164, 194, 157)
+    widths = [sum(G.run_width(G.castoro(size, it), txt) for txt, it in ln) for ln in spec.COVER["lines"]]
+    pw, ph = int(max(max(widths) + 2 * 48, 902)), int(70 + lh * len(widths) + 34)   # grid covers use a ~902px panel
+    d = ImageDraw.Draw(fr)
+    d.rounded_rectangle([x0, y0, x0 + pw, y0 + ph], radius=22, fill=G.FOREST)
+    lf = G.public(22, 700)
+    G.draw_run(d, x0 + 48, y0 + 52, label, lf, mint, extra=22 * 0.16)
+    for i, ln in enumerate(spec.COVER["lines"]):
+        x, bl = x0 + 48, y0 + 70 + lh * (i + 1) - 18
+        for txt, it in ln:
+            f = G.castoro(size, it)
+            G.draw_run(d, x, bl, txt, f, mint if it else G.CREAM)
+            x += G.run_width(f, txt)
+    fr = grain(fr)
+    base = os.path.join(out_dir, f"{spec.NAME}_cover")
+    fr.save(base + "_9x16.jpg", quality=94, subsampling=0)
+    fr.crop((0, (H - 1440) // 2, W, (H + 1440) // 2)).save(base + "_grid-3x4-preview.jpg", quality=90)
+    print(f"{spec.NAME}: cover at {t}s ({label}) -> {base}_9x16.jpg")
+
+
+def apply_channel(spec, name):
+    """--channel=ig: the spec's CHANNELS[name] overrides (END, VARIANTS, RATIOS, ...) and suffixes the output name."""
+    for k, v in spec.CHANNELS[name].items():
+        setattr(spec, k, v)
+    spec.NAME = f"{spec.NAME}_{name.upper()}"
+
+
 if __name__ == "__main__":
     spec = load_spec(sys.argv[1])
+    flags = dict(a[2:].split("=", 1) if "=" in a else (a[2:], True) for a in sys.argv[2:] if a.startswith("--"))
     args = [a for a in sys.argv[2:] if not a.startswith("--")]
-    step = remix if "--audio" in sys.argv else render
+    if "channel" in flags:
+        apply_channel(spec, flags["channel"])
+    if "cover" in flags:
+        cover(spec)
+        sys.exit()
+    step = remix if "audio" in flags else render
     for v in (args or list(spec.VARIANTS)):
         qa(spec, step(spec, v))
