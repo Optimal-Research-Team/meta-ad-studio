@@ -14,3 +14,6 @@ tools/node_modules/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Higgsfield raw downloads (rebuild assets/r2 with static/gen/prep.py)
+static/gen/*.png
