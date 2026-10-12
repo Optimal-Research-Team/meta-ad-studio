@@ -4,7 +4,7 @@ Each image carries the logo and one sentence. Nothing else goes on the image, be
 
 - **Singles:** 12 ads (MB1–MB6, LB1–LB6) at 4:5 Feed and 9:16 Stories/Reels. Each 9:16 is outpainted from the same photo.
 - **Carousels:** 2 carousels of 5 cards each (MC1–MC5, LC1–LC5) at 4:5, one sentence per card.
-- **Photos:** Higgsfield `gpt_image_2_5` (high, 2K). The in-clinic shots used real clinic photos as references. Outpaints were done with Higgsfield `outpaint`. Total spend was about 70 credits.
+- **Photos:** Higgsfield `gpt_image_2_5` (high, 2K). The in-clinic shots used real clinic photos as references. Outpaints were done with Higgsfield `outpaint`. That's 15 generations and 18 outpaints; the balance went from 1,719 to 1,502 credits during this session.
 - **Re-render:** `python3 render.py --page round2` (copy lives in `round2.js`). `gen/prep.py` rebuilds the backgrounds from the downloads in `gen/`.
 
 Use the same destinations, neutral UTMs and ad-set structure as round 1 (see COPY.md). Name the ads by their IDs so `utm_content={{ad.name}}` stays readable.
