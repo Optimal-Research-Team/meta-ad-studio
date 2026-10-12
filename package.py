@@ -20,7 +20,7 @@ ROUND = [  # ID, title, output folder, spec NAME
     ("LV2", "Longevity - A full hour", "out/longevity-ad2", "LongevityFullHour"),
     ("MV1", "Menopause - I don't feel like myself", "out/menopause-ad1", "MenopauseMyself"),
 ]
-CUTS = {"T": "Tight", "F": "Full"}
+CUTS = {"T": "Tight"}   # Oct 12 (Peter): Tight cuts only
 
 
 def dur(path):

@@ -286,7 +286,8 @@ def voice_pan(src):
     return f"pan=stereo|c0={mix}|c1={mix}"
 
 
-def audio(src, segs, body, total, path, music=None):
+def audio(src, segs, body, total, path, music=None, under=True):
+    """under=False: no music under the voice; the bed starts from its top as the end card comes in."""
     parts, labels = [], []
     for i, g in enumerate(segs):
         d = g["e"] - g["s"]
@@ -317,6 +318,13 @@ def audio(src, segs, body, total, path, music=None):
         m_lufs = float(re.findall(r"I:\s+(-?[\d.]+) LUFS", err)[-1])
         g1, g2 = 10 ** ((BED_LUFS - m_lufs) / 20), 10 ** ((BED_END_LUFS - m_lufs) / 20)
         t0 = body - XFADE_END
+    if music and not under:
+        d = total - t0
+        inputs += ["-i", music]
+        graph += (f";[1:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:{d:.3f},volume={g2:.4f},"
+                  f"afade=t=in:d=0.5,afade=t=out:st={d - 1.1:.3f}:d=1.1,adelay={int(t0 * 1000)}:all=1[m];"
+                  f"[v][m]amix=inputs=2:normalize=0:duration=first,{LIMITER}[out]")
+    elif music:
         inputs += ["-i", music, "-i", music]           # second copy crossfaded on for cuts longer than the bed
         graph += (f";[1:a][2:a]acrossfade=d=3,aresample=48000,aformat=channel_layouts=stereo,atrim=0:{total:.3f},"
                   f"volume=eval=frame:volume='if(lt(t,{t0:.3f}),{g1:.4f},{g1:.4f}+({g2:.4f}-{g1:.4f})*min((t-{t0:.3f})/0.6,1))',"
@@ -409,7 +417,7 @@ def render(spec, variant):
 
     total = n / FPS
     apath = os.path.join(work, f"{tag}.wav")
-    audio(src, segs, body, total, apath, music_path(spec))
+    audio(src, segs, body, total, apath, music_path(spec), getattr(spec, "MUSIC_UNDER_VOICE", True))
     mux(v916, apath, os.path.join(out_dir, f"{tag}_9x16.mp4"))
     if e45:
         mux(v45, apath, os.path.join(out_dir, f"{tag}_4x5.mp4"))
@@ -428,7 +436,7 @@ def remix(spec, variant):
     segs, body = timeline(spec, variant)
     tag = f"{spec.NAME}_{variant}"
     apath = os.path.join(work, f"{tag}.wav")
-    audio(src, segs, body, body + round(spec.END_DUR * FPS) / FPS, apath, music_path(spec))
+    audio(src, segs, body, body + round(spec.END_DUR * FPS) / FPS, apath, music_path(spec), getattr(spec, "MUSIC_UNDER_VOICE", True))
     for ratio in getattr(spec, "RATIOS", ("9x16", "4x5")):
         final = os.path.join(out_dir, f"{tag}_{ratio}.mp4")
         tmp = os.path.join(out_dir, f".{tag}_{ratio}.mp4")

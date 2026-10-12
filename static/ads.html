@@ -67,7 +67,7 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
 .cta { display: inline-flex; align-items: center; gap: 18px; height: 96px; padding: 0 42px 0 46px; border-radius: 999px; background: var(--forest); color: var(--cream); font-size: 32px; font-weight: 600; letter-spacing: -.005em; white-space: nowrap; }
 .cta svg { width: 30px; height: 30px; flex: none; }
 .dark .cta, .capsule .cta { background: var(--cream); color: var(--forest); }
-.addr { font-size: 23px; line-height: 1.35; color: var(--ink-muted); text-align: right; letter-spacing: .01em; }
+.addr { font-size: 23px; line-height: 1.35; color: var(--ink-muted); text-align: left; letter-spacing: .01em; }
 .dark .addr, .capsule .addr { color: var(--tone-muted, rgba(255, 252, 247, .66)); }
 
 /* ---------- M1 symptoms ---------- */
@@ -178,7 +178,8 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
   const mark = () => `<span class="mark">${use("sym")}Optimal</span>`;
   const brand = (a, noTag) => `<div class="brandrow">${mark()}${noTag ? "" : `<span class="tag">${a.tag}</span>`}</div>`;
   const eb = s => s ? `<span class="eyebrow">${md(s)}</span>` : "";
-  const cta = s => `<span class="cta">${s}${use("arr")}</span>`;
+  const SHOW_CTA = false;   // Oct 12: Meta overlays its own CTA button on the ad, so the drawn pill is off
+  const cta = s => SHOW_CTA ? `<span class="cta">${s}${use("arr")}</span>` : "";
   const foot = a => `<div class="foot">${cta(a.cta)}<span class="addr">630 Huronia Rd<br>Barrie, ON</span></div>`;
   const signoff = () => `<div class="signoff">${use("sym")}<span>beoptimal.ca</span></div>`;
   const gap = n => `<div style="height:${n}px;flex:none"></div>`;

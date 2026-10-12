@@ -47,6 +47,7 @@ HOOK = dict(eyebrow="MENOPAUSE & PERIMENOPAUSE CARE",
 KEEP = [("free", "orientation"), ("make", "sure"), ("most", "often"), ("followed", "by")]   # caption lines never split these
 EMPH = ["myself", "stress", "Cheryl", "fog", "sleep", "mood", "cycles", "alone", "diagnosis", "enough", "free", "right"]
 MUSIC = "brand/audio/bed_built_upon_a_path.wav"
+MUSIC_UNDER_VOICE = False   # Oct 12 (Peter): no music under Cheryl; the bed comes in on the end card only
 TAGS = [  # chapter chips (top of frame): how it starts
     (["step1"], 1, "Free phone information session"),
     (["step2"], 2, "Free orientation, no commitment"),

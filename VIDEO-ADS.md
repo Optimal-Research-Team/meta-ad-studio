@@ -4,9 +4,9 @@ There are three ads, all shot with Cheryl Cairns (care coordinator) at the clini
 
 | ID | Ad | Meta ad cuts | Instagram reel |
 |---|---|---|---|
-| **LV1** | Longevity, "3 things to know before you book." | Tight 35.3 s, Full 42.8 s | Tight, 35.3 s |
-| **LV2** | Longevity, "A full hour. Every year." | Tight 36.5 s, Full 39.0 s | Tight, 36.5 s |
-| **MV1** | Menopause, "I just don't feel like myself." | Tight 33.8 s, Full 42.2 s | Tight, 33.8 s |
+| **LV1** | Longevity, "3 things to know before you book." | LV1-T, 35.3 s | Tight, 35.3 s |
+| **LV2** | Longevity, "A full hour. Every year." | LV2-T, 36.5 s | Tight, 36.5 s |
+| **MV1** | Menopause, "I just don't feel like myself." | MV1-T, 33.8 s (music only on the end card) | Tight, 33.8 s |
 
 The two sets differ only in the end card. The **Meta ad** end card says "Book your free intro call", because Meta's own *Book now* button carries the click. The **Instagram** end card says "Comment LONGEVITY" / "Comment MENOPAUSE" instead, because a button drawn on an organic reel can't be tapped and the keyword triggers the existing auto-DM.
 
@@ -16,12 +16,14 @@ Re-render: `python3 studio.py ads/longevity_ad2_full_hour.py` (Meta, both cuts) 
 
 ## 1 · Meta ads
 
+Only the Tight cuts run as Meta ads (Peter, Oct 12). The Full cuts stay in `out/` but are not handed off.
+
 ### Setup (same as the static rounds, see `static/COPY.md`)
 
 | | LV2 Longevity | MV1 Menopause |
 |---|---|---|
 | Ad set | The Longevity membership ad set (alongside L1–L6 / LB1–LB6) | The Menopause ad set (alongside M1–M6 / MB1–MB6) |
-| Ad names | `LV1-T`, `LV1-F`, `LV2-T`, `LV2-F` | `MV1-T`, `MV1-F` |
+| Ad names | `LV1-T`, `LV2-T` | `MV1-T` |
 | Destination | `https://www.beoptimal.ca/membership` | `https://www.beoptimal.ca/services/menopause-and-perimenopause-care` |
 | URL parameters | `utm_source=meta&utm_medium=paid&utm_campaign=opt-b-q4&utm_content={{ad.name}}` | `utm_source=meta&utm_medium=paid&utm_campaign=opt-a-q4&utm_content={{ad.name}}` |
 | CTA button | Book now | Book now |
@@ -30,7 +32,6 @@ Re-render: `python3 studio.py ads/longevity_ad2_full_hour.py` (Meta, both cuts) 
 
 - **Thumbnail:** use the matching `thumbnail` jpg. It is the hook frame.
 - **Captions:** they are burned in, so leave Meta's auto-generated captions **off** or they'll double up. The `.srt` is only needed if you ever turn them on.
-- **Testing the two cuts:** run Tight and Full as separate ads in the same ad set and let Meta allocate the spend. Judge after 7 days on cost per landing-page view and on ThruPlays.
 
 ### LV1 · Longevity · "3 things to know before you book."
 
