@@ -133,8 +133,11 @@ def timeline(spec, variant):
     segs, t = [], 0.0
     for name in spec.VARIANTS[variant]:
         s, e, z = spec.SEGS[name]
+        joined = bool(segs) and abs(s - spec.SEGS[segs[-1]["name"]][1]) < 0.05
+        if joined:                                   # zoom cut on continuous speech: share the exact cut point
+            s = segs[-1]["e"]
         n = round((e - s) * FPS)
-        segs.append(dict(name=name, s=s, e=s + n / FPS, z=z, o=t, n=n))
+        segs.append(dict(name=name, s=s, e=s + n / FPS, z=z, o=t, n=n, joined=joined))
         t += n / FPS
     return segs, t
 
@@ -155,14 +158,24 @@ STOP = {"the", "a", "an", "to", "of", "in", "and", "or", "with", "for", "our", "
         "if", "so", "i'm", "we"}
 
 
-def _balanced(ws):
+KEEP = {("nurse", "practitioner"), ("body", "composition"), ("grip", "strength"), ("full", "hour"),
+        ("care", "coordinator"), ("optimal", "clinic"), ("information", "session"), ("information", "call"),
+        ("health", "domains"), ("blood", "work"), ("annual", "longevity"), ("longevity", "exam"),
+        ("intro", "call"), ("free", "phone"), ("last", "time")}       # caption lines never break inside these pairs
+
+
+def _bare(w):
+    return w["text"].lower().rstrip(".,:;!?")
+
+
+def _balanced(ws, keep=KEEP):
     sans, serif = G.public(G.CAP_SIZE, 600), G.castoro(G.EMPH_SIZE, True)
     sp = G.CAP_SIZE * 0.30
 
     def width(part):
         return sum(G.run_width(sans, w["text"].rstrip(".,:;!?")) for w in part) * 1.03 + sp * (len(part) - 1)
 
-    def cost(part, last):
+    def cost(part, last, nxt=None):
         px = width(part)
         if px > G.MAX_CAP_PX and len(part) > 1:
             return 1e9
@@ -171,12 +184,14 @@ def _balanced(ws):
             c += 400
         if len(part) == 1 and len(ws) > 1:
             c += 250
+        if nxt is not None and (_bare(part[-1]), _bare(nxt)) in keep:
+            c += 300
         return c
     n = len(ws)
     best, back = [0.0] + [1e18] * n, [0] * (n + 1)
     for j in range(1, n + 1):
         for i in range(j):
-            c = best[i] + cost(ws[i:j], j == n)
+            c = best[i] + cost(ws[i:j], j == n, ws[j] if j < n else None)
             if c < best[j]:
                 best[j], back[j] = c, i
     parts, j = [], n
@@ -185,7 +200,7 @@ def _balanced(ws):
     return parts[::-1]
 
 
-def chunks(otoks):
+def chunks(otoks, keep=KEEP):
     """Phrases break at punctuation and at every cut; each phrase is split into balanced one-line chunks."""
     phrases, cur = [], []
     for i, t in enumerate(otoks):
@@ -196,7 +211,7 @@ def chunks(otoks):
             phrases.append(cur); cur = []
     out = []
     for ph in phrases:
-        for part in _balanced(ph):
+        for part in _balanced(ph, keep):
             out.append(dict(tokens=part, s=part[0]["s"] - 0.08, e=part[-1]["e"] + 0.25))
     out[0]["s"] = max(out[0]["s"], 0.0)
     for a, b in zip(out, out[1:]):
@@ -275,8 +290,9 @@ def audio(src, segs, body, total, path, music=None):
     parts, labels = [], []
     for i, g in enumerate(segs):
         d = g["e"] - g["s"]
-        parts.append(f"[0:a]atrim=start={g['s']:.4f}:end={g['e']:.4f},asetpts=PTS-STARTPTS,"
-                     f"afade=t=in:d=0.012,afade=t=out:st={d - 0.025:.3f}:d=0.025[a{i}]")
+        fin = "" if g.get("joined") else ",afade=t=in:d=0.012"            # no fades inside continuous speech
+        fout = "" if i + 1 < len(segs) and segs[i + 1].get("joined") else f",afade=t=out:st={d - 0.025:.3f}:d=0.025"
+        parts.append(f"[0:a]atrim=start={g['s']:.6f}:end={g['e']:.6f},asetpts=PTS-STARTPTS{fin}{fout}[a{i}]")
         labels.append(f"[a{i}]")
     voice = (";".join(parts) + ";" + "".join(labels) + f"concat=n={len(segs)}:v=0:a=1,aresample=48000,"
              f"{voice_pan(src)}," + VOICE)
@@ -333,7 +349,7 @@ def render(spec, variant):
     toks = words(work, silences(src, work), spec.FIX)
     track = face_track(work)
     segs, body = timeline(spec, variant)
-    chs = chunks(to_out(segs, toks))
+    chs = chunks(to_out(segs, toks), KEEP | set(getattr(spec, "KEEP", ())))
     tag = f"{spec.NAME}_{variant}"
     write_srt(chs, os.path.join(out_dir, f"{tag}.srt"))
     grade = getattr(spec, "GRADE", DEFAULT_GRADE)
@@ -343,15 +359,15 @@ def render(spec, variant):
     win45 = (top45, top45 + H45)
 
     caps = G.Captions(chs, getattr(spec, "EMPH", ()))
-    hook = G.hook(spec.HOOK["eyebrow"], spec.HOOK["lines"], top=spec.HOOK.get("top", 290))
+    hook = G.hook(spec.HOOK["eyebrow"], spec.HOOK["lines"], top=spec.HOOK.get("top", 290), size=spec.HOOK.get("size", 74))
     hook_until = spec.HOOK.get("until", 3.4)
     chips = []
     for names, num, text in spec.TAGS:
         gs = [g for g in segs if g["name"] in names]
         if gs:
             chips.append((gs[0]["o"], gs[-1]["o"] + gs[-1]["n"] / FPS, G.chip(num, text)))
-    bg916, lay916 = G.endcard(W, H, 350)
-    bg45, lay45 = G.endcard(W, H45, (H45 - 695) // 2)
+    bg916, lay916 = G.endcard(W, H, 350, getattr(spec, "END", None))
+    bg45, lay45 = G.endcard(W, H45, None, getattr(spec, "END", None))
 
     v916, v45 = os.path.join(out_dir, f".{tag}_9x16.mp4"), os.path.join(out_dir, f".{tag}_4x5.mp4")
     e916, e45 = encoder(v916, W, H), encoder(v45, W, H45)

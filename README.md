@@ -59,17 +59,22 @@ and `silences.json`); the pipeline maps everything onto the output timeline.
 | Field | Meaning |
 |---|---|
 | `NAME`, `SRC`, `WORK`, `OUT` | Output name prefix and paths |
-| `SEGS` | `name: (start, end, punch_in)`; cut at pauses, ~0.13 s handles; alternate the punch-in at every cut so jump cuts read as intentional |
+| `SEGS` | `name: (start, end, punch_in)`; cut at pauses, ~0.13 s handles; alternate the punch-in at every cut so jump cuts read as intentional. A segment that starts where the previous one ends is a **zoom cut on continuous speech** (shared frame-exact cut point, no audio fades): use it to add beats inside a long unbroken sentence or a list |
 | `VARIANTS` | `variant: [segment names]`; each variant renders 9:16 and 4:5 |
 | `FIX` | `whisper word start: "caption text"` (`None` drops the word); punctuation marks phrase breaks |
 | `EMPH` | Words set in Castoro Italic inside captions; at most one per phrase |
-| `HOOK` | `eyebrow`, `lines` (runs of `(text, italic)`), `top` (keep it clear of the head), `until` (s) |
+| `KEEP` | Extra word pairs a caption line must never split (adds to the built-in list: nurse practitioner, body composition, full hour…) |
+| `HOOK` | `eyebrow`, `lines` (runs of `(text, italic)`), `top` (keep it clear of the head), `size` (Castoro px; 56–62 for one compact line over a close-up), `until` (s) |
 | `TAGS` | `([segment names], number, label)`: the chapter chip shown over those segments |
 | `MUSIC` | Path to a music bed (or omit for voice only) |
+| `END` | End-card copy: `eyebrow`, `headline` (lines, `*italic*`), `sub`, `cta`, `url`; omitted keys fall back to the longevity card |
 | `GRADE` | Optional ffmpeg RGB filter chain replacing the default warm grade |
 | `END_DUR`, `THUMB_AT` | End-card hold (s), thumbnail time (s) |
 
-See `ads/longevity_core_v2.py` for a full example (walk-and-talk, two variants).
+Examples:
+- `ads/longevity_core_v2.py`: walk-and-talk, three numbered points, two variants.
+- `ads/longevity_ad2_full_hour.py`: seated close-up, spoken hook question, zoom cut inside a long sentence.
+- `ads/menopause_ad1_myself.py`: staccato punch-ins on a symptom list, process-step chapters, menopause end card.
 
 ## Uploading to Meta
 

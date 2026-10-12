@@ -125,7 +125,7 @@ def _disp(text, last):
 
 
 def _key(text):
-    return text.lower().rstrip(".,:;!?").replace("’", "'")
+    return text.lower().strip("\u201c\u201d\"").rstrip(".,:;!?\u201d").replace("\u2019", "'")
 
 
 class Captions:
@@ -202,8 +202,22 @@ class Captions:
 
 
 # ------------------------------------------------------------------ end card
-def endcard(w, h, top):
-    """Cream background + staggered layers [(sprite, (x, y), delay_s)] (layout of the approved end_A_ad)."""
+LONGEVITY_END = dict(eyebrow=None, headline=["Live a better,", "*longer* life."],
+                     sub=["Free 15-minute intro call.", "No obligation. We call you."],
+                     cta="Book your free intro call  →", url="beoptimal.ca  ·  Barrie, ON")
+
+
+def endcard(w, h, top=None, copy=None):
+    """Cream background + staggered layers [(sprite, (x, y), delay_s)]. `copy` overrides LONGEVITY_END;
+    top=None centres the block (4:5). Default geometry matches the approved end_A_ad."""
+    c = dict(LONGEVITY_END, **(copy or {}))
+    eb = 125 if c["eyebrow"] else 0                      # eyebrow pushes the headline down
+    y_head = [225 + eb + 128 * i for i in range(len(c["headline"]))]
+    y_sub = [y_head[-1] + 82 + 50 * i for i in range(len(c["sub"]))]
+    y_pill = y_sub[-1] + 45
+    block = y_pill + 96 + 58 + 10                        # pill height + url line
+    if top is None:
+        top = (h - block) // 2
     bg = Image.new("RGB", (w, h), CREAM)
     layers = []
 
@@ -222,15 +236,15 @@ def endcard(w, h, top):
 
     lg = logo("green", 300)
     layer(lambda im: im.alpha_composite(lg, ((w - lg.width) // 2, top)), 0.0)
-    layer(lambda im: serif(im, top + 225, "Live a better,", 128), 0.08)
-    layer(lambda im: serif(im, top + 353, "*longer* life.", 128), 0.15)
+    if c["eyebrow"]:
+        layer(lambda im: tracked_caps(ImageDraw.Draw(im), w / 2, top + 140, c["eyebrow"], public(23, 700), FOREST, 0.14), 0.05)
+    for i, (y, ln) in enumerate(zip(y_head, c["headline"])):
+        layer(lambda im, y=y, ln=ln: serif(im, top + y, ln, 128 if len(c["headline"]) < 3 else 112), 0.08 + 0.07 * i)
     f = public(38, 400)
-    layer(lambda im: (sans(im, top + 435, "Free 15-minute intro call.", f, BODY),
-                      sans(im, top + 485, "No obligation. We call you.", f, BODY)), 0.26)
+    layer(lambda im: [sans(im, top + y, ln, f, BODY) for y, ln in zip(y_sub, c["sub"])], 0.26)
     box = {}
-    layer(lambda im: box.setdefault("b", pill(im, w / 2, top + 530, "Book your free intro call  →",
-                                               public(40, 500), 48, 26, FOREST, CREAM)), 0.34)
-    layer(lambda im: sans(im, box["b"] + 58, "beoptimal.ca  ·  Barrie, ON", public(32, 500), FOREST), 0.42)
+    layer(lambda im: box.setdefault("b", pill(im, w / 2, top + y_pill, c["cta"], public(40, 500), 48, 26, FOREST, CREAM)), 0.34)
+    layer(lambda im: sans(im, box["b"] + 58, c["url"], public(32, 500), FOREST), 0.42)
     return bg, layers
 
 
