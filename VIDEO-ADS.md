@@ -36,46 +36,46 @@ Only the Tight cuts run as Meta ads (Peter, Oct 12). The Full cuts stay in `out/
 ### LV1 · Longevity · "3 things to know before you book."
 
 **Primary text (short)**
-Three things to know before you book, from Cheryl, our care coordinator. Book a free 15-minute intro call.
+3 things to know before you book, from Cheryl, our care coordinator. Your own Nurse Practitioner, unhurried visits and fast appointments for $1,495 a year. Book a free 15-minute intro call.
 
 **Primary text (long)**
 Three things to know before you book, from Cheryl, our care coordinator:
 
 1. Every member gets a 60-minute annual longevity assessment with their Nurse Practitioner, including comprehensive bloodwork.
-2. Thorough, unrushed appointments.
+2. Thorough, unrushed appointments. We cap membership to keep it that way.
 3. Faster appointment times, so you're seen when you need to be.
 
-$1,495 a year, everything included. Book a free 15-minute intro call.
+$1,495 a year, about $4 a day, everything included and HSA eligible. Book a free 15-minute intro call. No commitment.
 
-**Headline:** 3 things to know before you book · **Description:** $1,495/yr, all included
+**Headline:** 3 things to know before you book · **Description:** About $4 a day, all included
 
 ### LV2 · Longevity · "A full hour. Every year."
 
 **Primary text (short)**
-Every Optimal member gets a 60-minute longevity assessment with their Nurse Practitioner, every year. Book a free 15-minute intro call.
+When did anyone last spend a full hour on your health? Every Optimal member gets one, every year, with their Nurse Practitioner. Book a free 15-minute intro call.
 
 **Primary text (long)**
 A full hour with your Nurse Practitioner, every year.
 
 Every Optimal member gets an annual longevity assessment: 60 minutes on your labs, your body composition and your goals, then a written plan for the next 12 months.
 
-$1,495 a year, everything included. Book a free 15-minute intro call.
+$1,495 a year, about $4 a day, everything included. We cap membership so visits stay unhurried. Book a free 15-minute intro call.
 
-**Headline:** A full hour. Every year. · **Description:** $1,495/yr, all included
+**Headline:** A full hour. Every year. · **Description:** About $4 a day, all included
 
 ### MV1 · Menopause · "I just don't feel like myself."
 
 **Primary text (short)**
-You don't need a diagnosis to reach out. Book a free 15-minute call with our NP-led menopause team in Barrie.
+"I just don't feel like myself." It's what our care coordinator hears most. You don't need a diagnosis to reach out: book a free 15-minute call. No referral needed.
 
 **Primary text (long)**
 "I just don't feel like myself." It's what our care coordinator hears most often.
 
 Brain fog, broken sleep, mood changes, cycles that have suddenly shifted. You don't need a diagnosis to reach out.
 
-Our NP-led menopause and perimenopause program in Barrie starts with a free 15-minute call. No referral needed.
+Our NP-led menopause and perimenopause program in Barrie starts within days, with labs and a 60-minute visit with the same NP every time. Your first step is a free 15-minute call. No referral needed.
 
-**Headline:** Menopause care in Barrie · **Alt headline:** You don't need a diagnosis · **Description:** Free 15-min intro call
+**Headline:** Menopause care in Barrie · **Alt headline:** You don't need a diagnosis · **Description:** Free 15-min call · No referral
 
 ---
 

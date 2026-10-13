@@ -113,6 +113,7 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
 .total { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; border-top: 2.5px solid var(--forest); padding: 26px 0 30px; }
 .total .amt { font-family: var(--serif); font-size: 124px; line-height: .86; letter-spacing: -.045em; color: var(--forest); }
 .total .amt small { font-family: var(--serif); font-size: 44px; letter-spacing: -.02em; color: var(--ink-muted); margin-left: 6px; }
+.daily { margin-top: 10px; font-size: 25px; font-weight: 600; letter-spacing: .02em; color: var(--forest); }
 .chip { display: inline-flex; align-items: center; height: 54px; padding: 0 26px; border-radius: 999px; background: var(--forest); color: var(--cream); font-size: 24px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; margin-bottom: 10px; }
 
 /* ---------- M5 steps ---------- */
@@ -146,6 +147,7 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
 .story .tl li { padding: 14px 0; }
 .story .total { padding: 20px 0 22px; }
 .story .ledger li { padding: 15px 0; }
+.post .ledger li { padding: 14px 0; }
 
 /* ---------- L2 venn / L3 week / L4 inbody / L5 plate ---------- */
 .venn { display: block; width: 100%; height: auto; }
@@ -255,7 +257,7 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
       return frame(a, f, "", `<div class="content">${brand(a)}${gap(S ? 36 : 64)}
         <div style="display:flex;flex-direction:column;gap:24px">${eb(a.eb)}<h2 class="h">${md(a.h)}</h2></div>
         ${gap(S ? 22 : 36)}<ul class="ledger">${items.map(i => `<li>${use("chk")}${i}</li>`).join("")}</ul>
-        <div class="total"><div class="amt">${a.price}<small>${a.per}</small></div><span class="chip">${a.chip}</span></div>
+        <div class="total"><div><div class="amt">${a.price}<small>${a.per}</small></div>${a.daily ? `<div class="daily">${a.daily}</div>` : ""}</div><span class="chip">${a.chip}</span></div>
         ${foot(a)}</div>${S ? signoff() : ""}`);
     },
     venn(a, f) {

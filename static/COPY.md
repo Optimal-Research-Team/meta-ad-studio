@@ -29,21 +29,21 @@ Copy lives in `content.js` and layouts live in `ads.html`. The QA step fails the
 
 ### M1 · Perimenopause is more than hot flashes
 **Primary text**
-Perimenopause can begin years before periods stop, and hot flashes are only one part of it. Sleep, mood, focus, joints and energy can all shift.
+Perimenopause is more than hot flashes. 3 a.m. wake-ups, brain fog, joint aches and mood changes can all be part of it, often years before periods stop.
 
-Our NP-led program in Barrie starts with a 60-minute assessment and comprehensive labs. No referral needed.
+Our NP-led program in Barrie starts with comprehensive labs and a 60-minute visit, and you can start within days.
 
-Book a free 15-minute call to see if it's a fit.
+Book your free 15-minute call. No referral needed.
 
-**Headline:** Menopause care in Barrie · **Description:** Free 15-min intro call
+**Headline:** More than hot flashes · **Description:** Free 15-min call · No referral
 
 ### M2 · 60 minutes
 **Primary text**
-The first visit with our Nurse Practitioner is 60 minutes, one-on-one, booked after the bloodwork is back. Then structured follow-ups at weeks 6 and 12 with the same NP.
+60 minutes. That's your first visit with our Nurse Practitioner: one-on-one, once your labs are back, with time to tell the whole story.
 
-Comprehensive bloodwork is OHIP-covered. No referral needed.
+Then follow-ups at weeks 6 and 12 with the same NP. Bloodwork is OHIP-covered.
 
-Book a free 15-minute call with our care coordinator.
+Book your free 15-minute call. No referral needed.
 
 **Headline:** A 60-minute first visit · **Description:** Same NP every visit
 
@@ -51,44 +51,46 @@ Book a free 15-minute call with our care coordinator.
 **Primary text**
 Menopause care with the price up front:
 
-Free 15-minute intro call
-Foundation Program (months 1–3): $895 + HST
+Free 15-minute call
+Foundation Program (months 1–3): $895 + HST, covering labs, a body scan, a 60-minute NP visit and 2 follow-ups
 Ongoing Care (month 4 on): $795 a year
 
-Bloodwork is OHIP-covered, and NP receipts may be claimable on extended health plans. Book your free call.
+Bloodwork is OHIP-covered. No referral needed. Book your free call to see if it fits.
 
-**Headline:** Menopause care, priced up front · **Description:** No referral needed
+**Headline:** Know the cost before you start · **Description:** Free 15-min call · No referral
 
 ### M4 · No referral. No family doctor needed.
 **Primary text**
-No referral or family doctor needed. Our menopause and perimenopause program is led by a Nurse Practitioner, for women 35 and older, at our clinic in Barrie, with appointments within days.
+No referral and no family doctor needed. Menopause and perimenopause care in Barrie, led by a Nurse Practitioner, for women 35 and older.
 
-Book a free 15-minute call to see if the program is right for you.
+You can start within days, and you see the same NP at every visit.
 
-**Headline:** No referral needed · **Description:** 630 Huronia Rd, Barrie
+Book your free 15-minute call.
+
+**Headline:** No referral needed · **Description:** Start within days in Barrie
 
 ### M5 · A clear plan, start to finish
 **Primary text**
-How it works:
-1. A free 15-minute call with our care coordinator
-2. Foundation Program (months 1–3): labs, an InBody scan, a 60-minute NP intake and two follow-ups
-3. Ongoing care with the same NP: three visits a year, prescriptions managed
+Here's exactly how it works:
+1. A free 15-minute call. No commitment.
+2. Months 1–3: labs, a body scan, a 60-minute NP visit and 2 follow-ups.
+3. Ongoing care with the same NP, 3 visits a year.
 
-Book your free call. No commitment.
+No referral needed. Book your free call.
 
-**Headline:** A clear plan, start to finish · **Description:** Free 15-min intro call
+**Headline:** A clear plan, start to finish · **Description:** Free 15-min call · No referral
 
 ### M6 · 3 a.m. Wide awake. Again.
 **Primary text**
 3 a.m. Wide awake. Again.
 
-Night sweats and broken sleep are common in perimenopause. Our NP-led program in Barrie starts with a 60-minute assessment and comprehensive labs.
+Night sweats and broken sleep are common in perimenopause, and they're treatable. Our NP-led program in Barrie starts with labs and a 60-minute visit, and you can start within days.
 
-Book a free 15-minute call. No referral needed.
+Book your free 15-minute call. No referral needed.
 
-**Headline:** Perimenopause care in Barrie · **Description:** Free 15-min intro call
+**Headline:** Perimenopause care in Barrie · **Description:** Free 15-min call · No referral
 
-**Extra headlines to rotate:** Seen in days, no referral · NP-led menopause care · 60-minute first visit
+**Extra headlines to rotate:** Start within days · No referral needed · Free 15-min call, no commitment
 
 ---
 
@@ -96,49 +98,49 @@ Book a free 15-minute call. No referral needed.
 
 ### L1 · One price. Everything included.
 **Primary text**
-Your own Nurse Practitioner, unlimited in-person and virtual visits, an annual 60-minute longevity assessment with advanced biomarkers, quarterly InBody scans and a written 12-month plan.
+One price, everything included: your own Nurse Practitioner, unlimited in-person and virtual visits, a 60-minute longevity assessment every year, body scans every 90 days and a written 12-month plan.
 
-$1,495 a year. HSA eligible.
+$1,495 a year, about $4 a day. HSA eligible.
 
-Book a free 15-minute intro call with our care coordinator.
+We cap membership so visits stay unhurried. Book a free 15-minute intro call.
 
-**Headline:** One price. Everything included. · **Description:** HSA eligible
+**Headline:** One price. Everything included. · **Description:** About $4 a day · HSA eligible
 
 ### L2 · Keep your family doctor
 **Primary text**
-Joining Optimal doesn't mean leaving your family doctor. Our Nurse Practitioners don't bill OHIP, so there's no outside-use penalty for you or your doctor.
+Keep your family doctor. Our Nurse Practitioners don't bill OHIP, so there's no outside-use penalty for you or your doctor.
 
-Many members keep their GP and use Optimal for same or next-day visits, longer appointments and a longevity plan.
+Then add a team with time: same or next-day visits, longer appointments and a longevity plan every year.
 
-Book a free 15-minute intro call.
+Book a free 15-minute intro call. No commitment.
 
-**Headline:** Keep your family doctor · **Description:** Private NP membership, Barrie
+**Headline:** Keep your family doctor · **Description:** Add an NP team with time
 
 ### L3 · Unwell on Monday? Seen by Tuesday.
 **Primary text**
-Same or next-day appointments for time-sensitive concerns, and routine visits with your own NP within a week, in person in Barrie or virtually.
+Unwell on Monday? Seen by Tuesday.
 
-Optimal is a private membership clinic: $1,495 a year, everything included.
+Members get same or next-day visits for time-sensitive concerns, and routine visits within a week, with their own Nurse Practitioner, in person or virtual.
 
-Book a free 15-minute intro call.
+$1,495 a year, everything included. Book a free 15-minute intro call.
 
-**Headline:** Same or next-day visits in Barrie · **Description:** $1,495/yr, all included
+**Headline:** Seen same or next day · **Description:** $1,495/yr · all included
 
 ### L4 · See what's working, every 90 days
 **Primary text**
-Every 90 days, an InBody scan tracks muscle mass, body fat and visceral fat, so you and your NP can see what's working between annual assessments.
+See what's working. An InBody scan every 90 days tracks your muscle, body fat and visceral fat, and your NP reviews it with you.
 
-Included in the Optimal membership: $1,495 a year.
+Included in the $1,495 membership, with unlimited visits and an annual longevity assessment.
 
 Book a free 15-minute intro call.
 
-**Headline:** Body scans every 90 days, included · **Description:** Optimal membership
+**Headline:** Body scans every 90 days · **Description:** Included in membership
 
 ### L5 · An hour with your NP. Every year.
 **Primary text**
-Once a year, your Nurse Practitioner spends 60 minutes with you on your labs, your goals and what's changed, then writes your plan for the next 12 months.
+An hour with your Nurse Practitioner, every year. We go through your advanced biomarkers line by line, then write your plan for the next 12 months.
 
-Advanced biomarkers that OHIP doesn't cover are included in the $1,495 membership.
+Included in the $1,495 membership, along with unlimited visits.
 
 Book a free 15-minute intro call.
 
@@ -146,15 +148,13 @@ Book a free 15-minute intro call.
 
 ### L6 · OHIP still covers your labs
 **Primary text**
-Optimal is a private membership, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders.
+Optimal is private, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders. The advanced longevity markers OHIP doesn't cover are included in your membership.
 
-The membership itself is $1,495 a year and HSA eligible.
+$1,495 a year, HSA eligible. Book a free 15-minute intro call to ask about your coverage.
 
-Book a free 15-minute intro call to ask about your coverage.
+**Headline:** OHIP still covers your labs · **Description:** $1,495/yr · HSA eligible
 
-**Headline:** Private care. OHIP still covers labs. · **Description:** $1,495/yr · HSA eligible
-
-**Extra headlines to rotate:** Your own NP in Barrie · Seen this week · Unlimited visits, one annual fee
+**Extra headlines to rotate:** About $4 a day, all included · Your own NP in Barrie · We cap membership
 
 ---
 
