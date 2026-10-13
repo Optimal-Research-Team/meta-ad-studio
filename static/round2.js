@@ -6,18 +6,18 @@
 window.R2 = [
   // ---------------- MENOPAUSE singles ----------------
   { id: "MB1", svc: "meno", img: "MB1", tone: "light", s: "Wide awake at 3 a.m., *again*." },
-  { id: "MB2", svc: "meno", img: "MB2", tone: "dark",  s: "Brain fog is a common *perimenopause* symptom.", align: "center" },
-  { id: "MB3", svc: "meno", img: "MB3", tone: "dark",  s: "Menopause care in Barrie, led by a *Nurse Practitioner*.", align: "right", w: 720 },
+  { id: "MB2", svc: "meno", img: "MB2", tone: "dark",  s: "Brain fog is a common|*perimenopause* symptom.", align: "center", fs: 78 },
+  { id: "MB3", svc: "meno", img: "MB3", tone: "dark",  s: "Menopause care|in Barrie, led by|a *Nurse Practitioner*.", align: "right", w: 820, fs: 80 },
   { id: "MB4", svc: "meno", img: "MB4", tone: "dark",  s: "Hot flashes don’t wait for a *good time*." },
   { id: "MB5", svc: "meno", img: "MB5", tone: "light", s: "No referral or family doctor *needed*.", box: true },
   { id: "MB6", svc: "meno", img: "MB6", tone: "dark",  s: "Your first NP visit is a full *60 minutes*." },
 
   // ---------------- LONGEVITY singles ----------------
   { id: "LB1", svc: "long", img: "LB1", tone: "dark",  s: "Barrie has a new kind of *health clinic*.", align: "center" },
-  { id: "LB2", svc: "long", img: "LB2", tone: "dark",  s: "Same or {next-day} visits when something *can’t wait*.", align: "right", w: 800 },
+  { id: "LB2", svc: "long", img: "LB2", tone: "dark",  s: "Same or {next-day}|visits when something|*can’t wait*.", align: "right", w: 860 },
   { id: "LB3", svc: "long", img: "LB3", tone: "dark",  s: "Your body composition, measured *every 90 days*." },
   { id: "LB4", svc: "long", img: "LB4", tone: "light", s: "Every member gets a written *12-month plan*." },
-  { id: "LB5", svc: "long", img: "LB5", tone: "dark",  s: "Your own Nurse Practitioner for *$1,495 a year*.", align: "right", w: 700, veil: true },
+  { id: "LB5", svc: "long", img: "LB5", tone: "dark",  s: "Your own Nurse Practitioner for *$1,495 a year*.", align: "right", w: 700, veil: true, st: 470 },
   { id: "LB6", svc: "long", img: "LB6", tone: "dark",  s: "Medically necessary labs are still covered by *OHIP*.", align: "center" },
 
   // ---------------- MENOPAUSE carousel (swipe order) ----------------
@@ -28,8 +28,8 @@ window.R2 = [
   { id: "MC5", svc: "meno-carousel", img: "WAIT", tone: "light", s: "Book your free call at *beoptimal.ca*.", card: 5, box: true },
 
   // ---------------- LONGEVITY carousel (swipe order) ----------------
-  { id: "LC1", svc: "long-carousel", img: "RECEPTION", tone: "dark", s: "Here’s what *$1,495 a year* includes.", card: 1, w: 760 },
-  { id: "LC2", svc: "long-carousel", img: "LC2", tone: "dark",  s: "Your own Nurse Practitioner, with *unlimited visits*.", card: 2, veil: true },
+  { id: "LC1", svc: "long-carousel", img: "RECEPTION", tone: "dark", s: "Here’s what *$1,495 a year* includes.", card: 1, w: 760, veil: true },
+  { id: "LC2", svc: "long-carousel", img: "LC2", s: "Your own Nurse Practitioner, with *unlimited visits*.", card: 2, box: true, tone: "light" },
   { id: "LC3", svc: "long-carousel", img: "LB4", tone: "light", s: "A 60-minute assessment and a written plan, *every year*.", card: 3 },
   { id: "LC4", svc: "long-carousel", img: "LB3", tone: "dark",  s: "A body composition scan *every 90 days*.", card: 4 },
   { id: "LC5", svc: "long-carousel", img: "LB1", tone: "dark",  s: "Book a free intro call at *beoptimal.ca*.", card: 5, align: "center" }

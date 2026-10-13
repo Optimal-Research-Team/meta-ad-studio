@@ -32,6 +32,9 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
 .frame.post { height: 1350px; padding: 84px 92px 88px; }
 /* Reels safe zone: top 14% (269px), bottom 35% (672px). Nothing that must be read goes outside it. */
 .frame.story { height: 1920px; padding: 270px 92px 672px; }
+/* 4:5 frames whose engraving forms a base band: content stops above it */
+.frame.post.band { padding-bottom: 250px; }
+.post.band .tl li { padding: 15px 0; }
 .frame.forest { background: var(--forest); color: var(--cream); }
 .frame.night { background: var(--forest-night); color: var(--cream); }
 .frame.sage { background: var(--sage-ground); }
@@ -57,17 +60,25 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
 .h em { font-style: italic; color: var(--forest-deep); letter-spacing: -.02em; }
 .dark .h em, .capsule .h em { color: var(--mint); }
 .body { font-size: 35px; line-height: 1.42; color: var(--ink-soft); max-width: 860px; text-wrap: pretty; }
+.body, .note, .tl p { text-wrap: pretty; }
+.prow > div > span { text-wrap: balance; }
 .dark .body, .capsule .body { color: rgba(255, 252, 247, .86); }
 .rg { position: relative; display: inline-block; white-space: nowrap; }
 .rg::after { content: ""; position: absolute; left: -.17em; right: -.2em; top: .04em; bottom: -.08em; border: 2.6px solid var(--ring); border-radius: 50%; transform: rotate(-3deg); }
 .dark .rg::after, .capsule .rg::after { border-color: var(--ring-on-dark); }
 
 /* ---------- CTA + footer ---------- */
-.foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex: none; }
+.spacer { flex: 1 0 40px; }
+/* footer: a hairline sign-off (the drawn CTA is off; Meta supplies the button) */
+.foot { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex: none; padding-top: 24px; border-top: 1.5px solid var(--hair); }
+.dark .foot { border-top-color: rgba(255, 252, 247, .2); }
+.capsule .foot { border-top-color: rgba(255, 252, 247, .18); padding-top: 20px; margin-top: 10px; }
+.url { font-size: 23px; font-weight: 600; letter-spacing: .02em; color: var(--forest); }
+.dark .url, .capsule .url { color: var(--mint); }
 .cta { display: inline-flex; align-items: center; gap: 18px; height: 96px; padding: 0 42px 0 46px; border-radius: 999px; background: var(--forest); color: var(--cream); font-size: 32px; font-weight: 600; letter-spacing: -.005em; white-space: nowrap; }
 .cta svg { width: 30px; height: 30px; flex: none; }
 .dark .cta, .capsule .cta { background: var(--cream); color: var(--forest); }
-.addr { font-size: 23px; line-height: 1.35; color: var(--ink-muted); text-align: left; letter-spacing: .01em; }
+.addr { font-size: 23px; line-height: 1.35; color: var(--ink-muted); text-align: left; letter-spacing: .02em; }
 .dark .addr, .capsule .addr { color: var(--tone-muted, rgba(255, 252, 247, .66)); }
 
 /* ---------- M1 symptoms ---------- */
@@ -79,7 +90,7 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
 /* ---------- M2 stat ---------- */
 .statrow { display: flex; align-items: flex-end; gap: 26px; }
 .stat { position: relative; display: inline-block; font-family: var(--serif); font-size: 380px; line-height: .8; letter-spacing: -.05em; color: var(--cream); }
-.stat::before { content: ""; position: absolute; left: -16px; right: -26px; bottom: 8px; height: 42%; background: var(--hatch-on-dark); border-radius: 4px; }
+.stat::before { content: ""; position: absolute; left: -6px; right: -10px; bottom: 8px; height: 42%; background: var(--hatch-on-dark); border-radius: 4px; }
 .stat span { position: relative; }
 .unit { font-family: var(--serif); font-style: italic; font-size: 76px; line-height: 1; letter-spacing: -.02em; color: var(--mint); padding-bottom: 18px; }
 .stat-h { font-family: var(--serif); font-size: 66px; line-height: 1.06; letter-spacing: -.025em; text-wrap: balance; max-width: 860px; }
@@ -90,7 +101,7 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
 .prow { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 28px; padding: 32px 0; border-top: 1.5px solid var(--hair); }
 .prow:first-child { border-top: 0; }
 .prow b { display: block; font-family: var(--serif); font-weight: 400; font-size: 44px; letter-spacing: -.02em; line-height: 1.05; }
-.prow span { display: block; margin-top: 10px; font-size: 25px; line-height: 1.35; color: var(--ink-muted); max-width: 560px; }
+.prow > div > span { display: block; margin-top: 10px; font-size: 25px; line-height: 1.35; color: var(--ink-muted); max-width: 560px; }
 .prow .p { font-family: var(--serif); font-size: 64px; letter-spacing: -.035em; color: var(--forest); white-space: nowrap; text-align: right; line-height: 1; }
 .prow .p small { font-family: var(--sans); font-size: 23px; letter-spacing: .02em; color: var(--ink-muted); margin-left: 8px; }
 .prow.free .p { font-style: italic; }
@@ -123,13 +134,12 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
 .capsule .cap-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .capsule .mark { font-size: 30px; }
 .capsule .mark svg { width: 30px; height: 30px; }
-.capsule .foot { margin-top: 12px; }
 .capsule .cta { height: 88px; font-size: 30px; padding: 0 38px 0 42px; }
-.capsule .addr { font-size: 22px; }
+.capsule .addr, .capsule .url { font-size: 22px; }
 
 /* 9:16 sign-off: lives under the Reels caption, visible on Stories */
 .signoff { position: absolute; z-index: 1; left: 0; right: 0; top: 1372px; display: flex; flex-direction: column; align-items: center; gap: 26px; }
-.signoff svg { width: 112px; height: 112px; color: var(--forest); opacity: .9; }
+.signoff svg { width: 132px; height: 132px; color: var(--forest); opacity: .85; }
 .signoff span { font-family: var(--serif); font-size: 44px; letter-spacing: -.02em; color: var(--forest); }
 .signoff i { width: 120px; height: 2px; background: currentColor; opacity: .25; }
 .dark .signoff svg, .dark .signoff span { color: var(--cream); }
@@ -173,15 +183,18 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
 <script src="content.js"></script>
 <script>
 (function () {
-  const md = s => String(s).replace(/\[\[(.+?)\]\]/g, '<span class="rg">$1</span>').replace(/\*(.+?)\*/g, "<em>$1</em>");
+  const md = s => String(s).replace(/\|/g, "<br>").replace(/\{(.+?)\}/g, '<span style="white-space:nowrap">$1</span>').replace(/\[\[(.+?)\]\]/g, '<span class="rg">$1</span>').replace(/\*(.+?)\*/g, "<em>$1</em>");
   const use = (id, cls) => `<svg class="${cls || ""}" aria-hidden="true"><use href="#${id}"/></svg>`;
   const mark = () => `<span class="mark">${use("sym")}Optimal</span>`;
   const brand = (a, noTag) => `<div class="brandrow">${mark()}${noTag ? "" : `<span class="tag">${a.tag}</span>`}</div>`;
   const eb = s => s ? `<span class="eyebrow">${md(s)}</span>` : "";
   const SHOW_CTA = false;   // Oct 12: Meta overlays its own CTA button on the ad, so the drawn pill is off
   const cta = s => SHOW_CTA ? `<span class="cta">${s}${use("arr")}</span>` : "";
-  const foot = a => `<div class="foot">${cta(a.cta)}<span class="addr">630 Huronia Rd<br>Barrie, ON</span></div>`;
-  const signoff = () => `<div class="signoff">${use("sym")}<span>beoptimal.ca</span></div>`;
+  const sign = () => `<span class="addr">630 Huronia Rd, Barrie</span><span class="url">beoptimal.ca</span>`;
+  const foot = a => SHOW_CTA
+    ? `<div class="spacer"></div><div class="foot">${cta(a.cta)}<span class="addr">630 Huronia Rd<br>Barrie, ON</span></div>`
+    : `<div class="spacer"></div><div class="foot">${sign()}</div>`;
+  const signoff = () => `<div class="signoff">${use("sym")}</div>`;
   const gap = n => `<div style="height:${n}px;flex:none"></div>`;
   const frame = (a, f, cls, inner) => `<div class="frame ${f} ${cls}" data-out="${a.svc}/${a.id}_${f === "post" ? "4x5" : "9x16"}">${inner}</div>`;
 
@@ -200,8 +213,8 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
     },
     stat(a, f) {
       const S = f === "story";
-      const art = `<div class="art" style="left:0;right:0;bottom:${S ? 0 : -40}px;opacity:${S ? .9 : .32}"><img src="assets/engraving-shoreline-cream.png"></div>`;
-      return frame(a, f, "forest dark", `${art}<div class="content">${brand(a)}${gap(S ? 90 : 120)}
+      const art = `<div class="art" style="left:0;right:0;bottom:${S ? 0 : -140}px;opacity:${S ? .9 : .55}"><img src="assets/engraving-shoreline-cream.png"></div>`;
+      return frame(a, f, `forest dark ${S ? "" : "band"}`, `${art}<div class="content">${brand(a)}${gap(S ? 90 : 120)}
         ${eb(a.eb)}${gap(S ? 56 : 64)}
         <div class="statrow"><span class="stat"><span>${a.num}</span></span><span class="unit">${a.unit}</span></div>
         ${gap(S ? 44 : 50)}<h2 class="stat-h">${md(a.h)}</h2>
@@ -212,7 +225,7 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
       const S = f === "story";
       return frame(a, f, "sage", `<div class="content">${brand(a)}${gap(S ? 60 : 92)}
         <div style="display:flex;flex-direction:column;gap:24px">${eb(a.eb)}<h2 class="h">${md(a.h)}</h2></div>
-        ${gap(S ? 40 : 52)}<div class="card">${a.rows.map((r, i) => `<div class="prow ${r.p === "Free" ? "free" : ""}"><div><b>${r.l}</b>${S && i ? "" : `<span>${r.s}</span>`}</div><div class="p">${r.p}${r.u ? `<small>${r.u}</small>` : ""}</div></div>`).join("")}</div>
+        ${gap(S ? 40 : 52)}<div class="card">${a.rows.map((r, i) => `<div class="prow ${r.p === "Free" ? "free" : ""}"><div><b>${r.l}</b>${S && i ? "" : `<span>${md(r.s)}</span>`}</div><div class="p">${r.p}${r.u ? `<small>${r.u}</small>` : ""}</div></div>`).join("")}</div>
         ${S ? "" : `${gap(30)}<p class="note">${a.note}</p>`}
         ${foot(a)}</div>${S ? signoff() : ""}`);
     },
@@ -225,15 +238,15 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
         <div class="capsule" style="${where}">
           <div class="cap-top">${mark()}<span class="eyebrow" style="font-size:21px">${a.eb}</span></div>
           <h2 class="h">${md(a.h)}</h2><p class="body">${md(a.body)}</p>
-          <div class="foot">${cta(a.cta)}<span class="addr">630 Huronia Rd<br>Barrie, ON</span></div>
+          <div class="foot">${SHOW_CTA ? cta(a.cta) : sign()}</div>
         </div>`);
     },
     steps(a, f) {
       const S = f === "story";
-      return frame(a, f, "", `<div class="art" style="left:0;right:0;bottom:${S ? 0 : -60}px;opacity:${S ? .9 : .5}"><img src="assets/engraving-shoreline.png"></div>
-        <div class="content">${brand(a)}${gap(S ? 40 : 100)}
+      return frame(a, f, S ? "" : "band", `<div class="art" style="left:0;right:0;bottom:${S ? 0 : -140}px;opacity:${S ? .9 : .7}"><img src="assets/engraving-shoreline.png"></div>
+        <div class="content">${brand(a)}${gap(S ? 40 : 56)}
         <div style="display:flex;flex-direction:column;gap:24px">${eb(a.eb)}<h2 class="h">${md(a.h)}</h2></div>
-        ${gap(S ? 22 : 56)}<ol class="tl">${a.steps.map(s => `<li><span class="n">${s.n}</span><div><h4>${s.t}</h4><p>${s.d}</p></div></li>`).join("")}</ol>
+        ${gap(S ? 22 : 34)}<ol class="tl">${a.steps.map(s => `<li><span class="n">${s.n}</span><div><h4>${s.t}</h4><p>${s.d}</p></div></li>`).join("")}</ol>
         ${foot(a)}</div>`);
     },
     ledger(a, f) {
@@ -252,16 +265,16 @@ body { font-family: var(--sans); color: var(--ink-strong); -webkit-font-smoothin
         <circle cx="318" cy="200" r="186" fill="none" stroke="rgba(255,252,247,.55)" stroke-width="2.5"/>
         <circle cx="578" cy="200" r="186" fill="rgba(255,252,247,.07)" stroke="#FFFCF7" stroke-width="2.5"/>
         <circle cx="578" cy="200" r="186" fill="url(#hC)" clip-path="url(#cl-${f})"/>
-        <text x="236" y="186" text-anchor="middle" font-family="Castoro" font-size="34" fill="#FFFCF7" letter-spacing="-0.6">Your family</text>
-        <text x="236" y="226" text-anchor="middle" font-family="Castoro" font-size="34" fill="#FFFCF7" letter-spacing="-0.6">doctor</text>
-        <text x="236" y="270" text-anchor="middle" font-family="Public Sans" font-weight="600" font-size="17" letter-spacing="2.4" fill="rgba(255,252,247,.6)">OHIP</text>
+        <text x="236" y="186" text-anchor="middle" font-family="Castoro" font-size="30" fill="#FFFCF7" letter-spacing="-0.5">Your family</text>
+        <text x="236" y="226" text-anchor="middle" font-family="Castoro" font-size="30" fill="#FFFCF7" letter-spacing="-0.5">doctor</text>
+        <text x="236" y="266" text-anchor="middle" font-family="Public Sans" font-weight="600" font-size="17" letter-spacing="2.4" fill="rgba(255,252,247,.6)">OHIP</text>
         <text x="448" y="214" text-anchor="middle" font-family="Castoro" font-style="italic" font-size="50" fill="#A4C29D">You</text>
-        <text x="660" y="186" text-anchor="middle" font-family="Castoro" font-size="34" fill="#FFFCF7" letter-spacing="-0.6">Your Optimal</text>
-        <text x="660" y="226" text-anchor="middle" font-family="Castoro" font-size="34" fill="#FFFCF7" letter-spacing="-0.6">NP team</text>
-        <text x="660" y="270" text-anchor="middle" font-family="Public Sans" font-weight="600" font-size="17" letter-spacing="2.4" fill="rgba(255,252,247,.6)">MEMBERSHIP</text></svg>`;
+        <text x="652" y="186" text-anchor="middle" font-family="Castoro" font-size="30" fill="#FFFCF7" letter-spacing="-0.5">Your Optimal</text>
+        <text x="652" y="226" text-anchor="middle" font-family="Castoro" font-size="30" fill="#FFFCF7" letter-spacing="-0.5">NP team</text>
+        <text x="652" y="266" text-anchor="middle" font-family="Public Sans" font-weight="600" font-size="17" letter-spacing="2.4" fill="rgba(255,252,247,.6)">MEMBERSHIP</text></svg>`;
       return frame(a, f, "forest dark", `<div class="content">${brand(a)}${gap(S ? 60 : 96)}
-        <div style="display:flex;flex-direction:column;gap:24px">${eb(a.eb)}<h2 class="h">${md(a.h)}</h2></div>
-        ${gap(S ? 44 : 64)}${svg}${gap(S ? 36 : 50)}<p class="body">${md(a.body)}</p>
+        <div style="display:flex;flex-direction:column;gap:24px">${eb(a.eb)}<h2 class="h" style="font-size:${S ? 74 : 78}px">${md(a.h)}</h2></div>
+        ${gap(S ? 40 : 56)}${svg}${gap(S ? 36 : 50)}<p class="body">${md(a.body)}</p>
         ${foot(a)}</div>${S ? signoff() : ""}`);
     },
     week(a, f) {

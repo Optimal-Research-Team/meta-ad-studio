@@ -20,7 +20,7 @@ body { font-family: var(--sans); -webkit-font-smoothing: antialiased; font-featu
 .frame.post { height: 1350px; }
 .frame.story { height: 1920px; }
 .bg { position: absolute; inset: 0; }
-.bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bg img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.92) contrast(.97) brightness(1.01) sepia(.05); }
 
 /* Text column. 9:16 starts below the Reels top 14% (269px) and stays above the bottom 35%. */
 .txt { position: absolute; z-index: 2; left: 84px; right: 84px; display: flex; flex-direction: column; gap: 34px; }
@@ -35,8 +35,8 @@ body { font-family: var(--sans); -webkit-font-smoothing: antialiased; font-featu
 .post .txt.box { left: 60px; top: 60px; }
 .story .txt.box { left: 60px; top: 284px; }
 .txt.box .s { font-size: 80px; }
-.mark { display: inline-flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 32px; letter-spacing: -.02em; line-height: 1; }
-.mark svg { width: 32px; height: 32px; }
+.mark { display: inline-flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 35px; letter-spacing: -.02em; line-height: 1; }
+.mark svg { width: 35px; height: 35px; }
 .s { font-family: var(--serif); font-weight: 400; letter-spacing: -.03em; line-height: 1.02; text-wrap: balance; max-width: 880px; }
 .post .s { font-size: 86px; }
 .story .s { font-size: 86px; }
@@ -76,7 +76,7 @@ body { font-family: var(--sans); -webkit-font-smoothing: antialiased; font-featu
 <script src="round2.js"></script>
 <script>
 (function () {
-  const md = s => String(s).replace(/\{(.+?)\}/g, '<span class="nw">$1</span>').replace(/\*(.+?)\*/g, "<em>$1</em>");
+  const md = s => String(s).replace(/\|/g, "<br>").replace(/\{(.+?)\}/g, '<span class="nw">$1</span>').replace(/\*(.+?)\*/g, "<em>$1</em>");
   const use = id => `<svg aria-hidden="true"><use href="#${id}"/></svg>`;
   const frame = (a, f) => {
     const size = f === "post" ? "4x5" : "9x16";
@@ -84,7 +84,7 @@ body { font-family: var(--sans); -webkit-font-smoothing: antialiased; font-featu
     return `<div class="frame ${f}" data-out="${out}">
       <div class="bg"><img src="assets/r2/${a.img}_${size}.jpg" style="object-position:${(a.pos && a.pos[f]) || "50% 50%"}"></div>
       ${a.veil ? `<div class="veil ${a.tone} ${a.align || ""}"></div>` : ""}
-      <div class="txt ${a.tone} ${a.align || ""} ${a.box ? "box" : ""} ${(a.at && a.at[f]) || ""}" style="${a.w ? `max-width:${a.w}px;${a.align === "right" ? "left:auto" : a.align === "center" ? "margin:0 auto" : ""}` : ""}"><span class="mark">${use("sym")}Optimal</span><h2 class="s">${md(a.s)}</h2></div>
+      <div class="txt ${a.tone} ${a.align || ""} ${a.box ? "box" : ""} ${(a.at && a.at[f]) || ""}" style="${f === "story" && a.st ? `top:${a.st}px;` : ""}${a.w ? `max-width:${a.w}px;${a.align === "right" ? "left:auto" : a.align === "center" ? "margin:0 auto" : ""}` : ""}"><span class="mark">${use("sym")}Optimal</span><h2 class="s" style="${a.fs ? `font-size:${a.fs}px` : ""}">${md(a.s)}</h2></div>
       ${a.card && a.card < 5 ? `<span class="next ${a.tone === "light" ? "light" : "dark"}">${use("arr")}</span>` : ""}
     </div>`;
   };

@@ -34,8 +34,8 @@ window.ADS = [
     h: "Know the cost *before* you start.",
     rows: [
       { l: "Intro call", s: "15 minutes with our care coordinator", p: "Free" },
-      { l: "Foundation Program", s: "Months 1–3 · labs, InBody, 60-min NP intake, 2 follow-ups", p: "$895", u: "+ HST" },
-      { l: "Ongoing Care", s: "From month 4 · 3 NP visits a year, prescriptions managed", p: "$795", u: "/ yr" }
+      { l: "Foundation Program", s: "Months 1–3 · labs, InBody, {60-min} NP intake, {2 follow-ups}", p: "$895", u: "+ HST" },
+      { l: "Ongoing Care", s: "From month 4 · {3 NP visits a year}, prescriptions managed", p: "$795", u: "/ yr" }
     ],
     note: "Bloodwork is OHIP-covered. NP receipts may be claimable on extended health plans.",
     cta: CALL
@@ -44,7 +44,7 @@ window.ADS = [
     id: "M4", svc: "meno", t: "photo", tag: "Menopause care",
     img: "assets/B3w.jpg", pos: { post: "22% 50%", story: "21% 50%" }, at: "bottom", storyAt: "top", storyZoom: 1.26,
     eb: "Menopause &amp; perimenopause care",
-    h: "No referral. No family doctor *needed*.",
+    h: "No referral.|No family doctor *needed*.",
     body: "NP-led care for women 35+ at our clinic in Barrie. Appointments within days.",
     cta: CALL
   },
@@ -63,7 +63,7 @@ window.ADS = [
     id: "M6", svc: "meno", t: "photo", tag: "Perimenopause",
     img: "assets/B1v.jpg", pos: { post: "50% 62%", story: "50% 50%" }, at: "top",
     eb: "Perimenopause",
-    h: "3 a.m. Wide awake. *Again.*",
+    h: "3 a.m. Wide awake.|*Again.*",
     body: "Night sweats and broken sleep are common in perimenopause. A 60-minute NP assessment is a good place to start.",
     cta: CALL
   },
@@ -81,7 +81,7 @@ window.ADS = [
   {
     id: "L2", svc: "long", t: "venn", tag: "Longevity membership",
     eb: "Good to know",
-    h: "Keep your family doctor. Add a team with [[time]].",
+    h: "Keep your family doctor.|Add a team with [[time]].",
     body: "Our NPs don’t bill OHIP, so there’s no outside-use penalty for you or your doctor.",
     cta: CALL
   },
