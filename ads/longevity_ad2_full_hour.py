@@ -53,10 +53,10 @@ THUMB_AT = 1.0
 COVER = dict(lines=[[("A full hour.", False)], [("Every year.", True)]])    # Instagram cover headline (reel-cover style)
 COVER_AT = 2.4    # source s: a clean frame before the first word, for the Instagram cover
 
-# Organic Instagram: same edit, Tight only, 9:16 only. The end card swaps the (untappable) Book button for the
-# keyword that triggers the Meta Business Suite auto-DM.  python3 studio.py ads/longevity_ad2_full_hour.py --channel=ig
+# Organic Instagram: same edit, Tight only, 9:16 only. The end card swaps the (untappable) Book button for a
+# link-in-bio line (Oct 13: no public comment keywords, Peter).  python3 studio.py ads/longevity_ad2_full_hour.py --channel=ig
 CHANNELS = {
     "ig": dict(VARIANTS={"Tight": VARIANTS["Tight"]}, RATIOS=("9x16",),
-               END=dict(sub=["Comment LONGEVITY and we\u2019ll", "send you the details."],
-                        cta="Comment LONGEVITY", url="@beoptimal.ca  \u00b7  Barrie, ON")),
+               END=dict(sub=["Book a free intro call to ask", "about the Longevity Membership."],
+                        cta="Link in bio", url="@beoptimal.ca  \u00b7  Barrie, ON")),
 }

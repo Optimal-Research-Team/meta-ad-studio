@@ -53,6 +53,6 @@ COVER_AT = 1.5    # source s: standing in the lounge before the first word
 # Organic Instagram: Tight only, 9:16 only, keyword end card.  python3 studio.py ads/longevity_core_v2.py --channel=ig
 CHANNELS = {
     "ig": dict(VARIANTS={"Tight": VARIANTS["Tight"]}, RATIOS=("9x16",),
-               END=dict(sub=["Comment LONGEVITY and we\u2019ll", "send you the details."],
-                        cta="Comment LONGEVITY", url="@beoptimal.ca  \u00b7  Barrie, ON")),
+               END=dict(sub=["Book a free intro call to ask", "about the Longevity Membership."],
+                        cta="Link in bio", url="@beoptimal.ca  \u00b7  Barrie, ON")),
 }
