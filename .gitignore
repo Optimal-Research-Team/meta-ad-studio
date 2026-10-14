@@ -18,3 +18,7 @@ __pycache__/
 # Higgsfield raw downloads (rebuild assets/r2 with static/gen/prep.py)
 static/gen/*.png
 !static/gen/LB5_9x16_shoe.png
+# round 4 (IV iron): raw Higgsfield downloads + rendered intermediates (rebuild with static/gen/prep4.py)
+static/gen/r4/*_raw.png
+static/gen/r4/IR2_*.png
+static/gen/r4/video/*.png

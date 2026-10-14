@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: "Castoro"; src: url("../../../brand/fonts/Castoro-Regular.ttf"); }
+@font-face { font-family: "Castoro"; src: url("../../../brand/fonts/Castoro-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Public Sans"; src: url("../../../brand/fonts/PublicSans.ttf"); font-weight: 100 900; }
+* { margin: 0; box-sizing: border-box; }
+body { background: #777; }
+.f { position: relative; width: 1080px; overflow: hidden; background: #F5EFE3; font-family: "Public Sans", sans-serif; color: #1F2A1C; }
+.f.post { height: 1350px; } .f.story { height: 1920px; }
+.paper { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 30%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%); }
+.cells { position: absolute; width: 760px; right: -170px; opacity: .55; }
+.post .cells { bottom: -380px; width: 700px; right: -150px; } .story .cells { bottom: -140px; }
+.bars { position: absolute; left: 84px; right: 84px; display: flex; flex-direction: column; gap: 70px; }
+.post .bars { top: 560px; } .story .bars { top: 740px; }
+.lab { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 22px; }
+.lab b { font-family: "Castoro", serif; font-weight: 400; font-size: 46px; letter-spacing: -.02em; }
+.lab span { font-size: 28px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4F5B4B; }
+.track { position: relative; height: 34px; }
+.track .line { position: absolute; left: 0; right: 0; top: 16px; height: 2px; background: rgba(44,78,37,.35); }
+.track .range { position: absolute; top: 0; bottom: 0; left: 18%; right: 18%; border-radius: 8px;
+  background: repeating-linear-gradient(135deg, rgba(44,78,37,.42) 0 2px, transparent 2px 9px), rgba(44,78,37,.10);
+  box-shadow: inset 0 0 0 2px rgba(44,78,37,.45); }
+.track .dot { position: absolute; top: -9px; width: 52px; height: 52px; margin-left: -26px; border-radius: 50%; background: #2C4E25; box-shadow: 0 0 0 6px #F5EFE3; }
+.ends { display: flex; justify-content: space-between; margin-top: 16px; font-size: 26px; color: #4F5B4B; font-weight: 500; }
+</style></head><body>
+<div class="f post" data-out="IR2_4x5"><div class="paper"></div><img class="cells" src="vein-red-cells.png">
+<div class="bars">
+  <div><div class="lab"><b>Hemoglobin</b><span>In range</span></div><div class="track"><div class="line"></div><div class="range"></div><div class="dot" style="left:50%"></div></div></div>
+  <div><div class="lab"><b>Ferritin, your iron stores</b><span>Barely in range</span></div><div class="track"><div class="line"></div><div class="range"></div><div class="dot" style="left:20%"></div></div>
+    <div class="ends"><span>Low</span><span>High</span></div></div>
+</div></div><div class="f story" data-out="IR2_9x16"><div class="paper"></div><img class="cells" src="vein-red-cells.png">
+<div class="bars">
+  <div><div class="lab"><b>Hemoglobin</b><span>In range</span></div><div class="track"><div class="line"></div><div class="range"></div><div class="dot" style="left:50%"></div></div></div>
+  <div><div class="lab"><b>Ferritin, your iron stores</b><span>Barely in range</span></div><div class="track"><div class="line"></div><div class="range"></div><div class="dot" style="left:20%"></div></div>
+    <div class="ends"><span>Low</span><span>High</span></div></div>
+</div></div></body></html>
