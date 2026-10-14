@@ -22,15 +22,19 @@ IRV1 lives at `out/r4/iron/IRV1_9x16.mp4` and `IRV1_4x5.mp4`, with thumbnails. I
 
 ## Setup
 
-**There's no live landing page yet.** `beoptimal.ca/iv-iron` returns the 404 page. So the test runs on a **Meta Instant Form**: the waitlist form opens inside Facebook and Instagram, and nothing on the website is needed. When the waitlist page ships, switch the destination to it.
+**There's no live landing page yet.** `beoptimal.ca/iv-iron` returns the 404 page. The waitlist page exists only as a review build ([iron-infusions-waitlist](https://optimal-research-team.github.io/iron-infusions-waitlist/), noindex, forms not wired). So the test runs on a **Meta Instant Form**: the waitlist form opens inside Facebook and Instagram, and nothing on the website is needed. When the page ships on beoptimal.ca with its forms wired, switch the destination to it and add the URL parameters below.
+
+**Launch order:**
+- **IR1, IR3 and IRV1 can run now.**
+- **Hold IR2 until the Clinical Director signs off on "low iron without anemia".** In Canada the infusion product's indication is iron-deficiency *anemia* in adults who can't tolerate oral iron or didn't respond to it. The landing-page handoff (Oct 14) already parks the same claim (the athletes card, the "Low iron, no anemia" referral option) for that sign-off, so the ad waits on the same call.
 
 | | IV iron (pre-launch) |
 |---|---|
 | Campaign objective | Leads → Instant Form |
 | Audience | Adults 25–64, about 40 km around Barrie, broad (no interests) |
-| Ads | IR1, IR2, IR3 and IRV1 in one ad set; placement asset customization (4:5 Feed, 9:16 Stories/Reels) |
+| Ads | IR1, IR3 and IRV1 in one ad set (add IR2 once it's cleared); placement asset customization (4:5 Feed, 9:16 Stories/Reels) |
 | CTA button | Sign up |
-| AI label | **On** for all four (AI-generated engraving, room and video) |
+| AI label | **On** for every ad (AI-generated engraving, room and video) |
 | URL parameters (only once a website destination exists) | `utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}` |
 
 **Instant Form ("Join the IV iron founding waitlist")**
@@ -51,11 +55,13 @@ IRV1 lives at `out/r4/iron/IRV1_9x16.mp4` and `IRV1_4x5.mp4`, with thumbnails. I
 
 ## Copy
 
+**Once the opening date is confirmed** (the landing page says November 2026, still pending), add "Opening November 2026." after the first sentence of each primary text. A real date is the only urgency these ads should use.
+
 ### IR1 · "Two routes to your iron stores, and one skips the gut."
 **Primary text:** There are two routes to your iron stores. Pills are absorbed through the gut, a little at a time. An IV infusion skips the gut and refills iron stores directly, usually in one or two monitored visits. IV iron is coming to Optimal in Barrie: no referral needed, and we order your bloodwork first. Join the founding waitlist for first access and founding pricing.
 **Headline:** Skip the gut: IV iron in Barrie · **Description:** Founding waitlist · No referral
 
-### IR2 · "Low iron doesn't always look like anemia."
+### IR2 · "Low iron doesn't always look like anemia." (hold until cleared, see Launch order)
 **Primary text:** Low iron doesn't always look like anemia. Hemoglobin can sit in range while iron stores, measured as ferritin, run low. IV iron is coming to Optimal in Barrie, led by a Nurse Practitioner who reviews your bloodwork before anything else. No referral needed. Join the founding waitlist for first access and founding pricing.
 **Headline:** Iron stores, checked properly · **Description:** Founding waitlist · Barrie
 
