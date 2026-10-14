@@ -2,97 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Optimal round 2 renderer</title>
-<style>
-@font-face { font-family: "Castoro"; src: url("../brand/fonts/Castoro-Regular.ttf"); font-weight: 400; font-style: normal; }
-@font-face { font-family: "Castoro"; src: url("../brand/fonts/Castoro-Italic.ttf"); font-weight: 400; font-style: italic; }
-@font-face { font-family: "Public Sans"; src: url("../brand/fonts/PublicSans.ttf"); font-weight: 100 900; font-style: normal; }
-:root {
-  --cream: #FFFCF7; --ink: #1F2A1C; --forest-deep: #1A500F; --mint: #C9DEC3;
-  --serif: "Castoro", Georgia, serif; --sans: "Public Sans", Arial, sans-serif;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { background: #777; }
-body { font-family: var(--sans); -webkit-font-smoothing: antialiased; font-feature-settings: "kern", "liga"; }
-#root { display: flex; flex-wrap: wrap; gap: 40px; padding: 40px; align-items: flex-start; }
-
-.frame { position: relative; width: 1080px; overflow: hidden; flex: none; background: #2a2a2a; }
-.frame.post { height: 1350px; }
-.frame.story { height: 1920px; }
-.bg { position: absolute; inset: 0; }
-.bg img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.92) contrast(.97) brightness(1.01) sepia(.05); }
-
-/* Text column. 9:16 starts below the Reels top 14% (269px) and stays above the bottom 35%. */
-.txt { position: absolute; z-index: 2; left: 84px; right: 84px; display: flex; flex-direction: column; gap: 34px; }
-.post .txt { top: 76px; }
-.story .txt { top: 284px; }
-.txt.center { align-items: center; text-align: center; }
-.txt.right { align-items: flex-end; text-align: right; }
-.post .txt.bottom { top: auto; bottom: 80px; }
-.nw { white-space: nowrap; }
-/* capsule for photos whose top is busy (track lights, fixtures): brand rule is capsules, not scrims */
-.txt.box { right: auto; max-width: 912px; background: rgba(28, 49, 24, .86); backdrop-filter: blur(12px); border-radius: 32px; padding: 40px 48px 48px; gap: 26px; }
-.post .txt.box { left: 60px; top: 60px; }
-.story .txt.box { left: 60px; top: 284px; }
-.txt.box .s { font-size: 80px; }
-.mark { display: inline-flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 35px; letter-spacing: -.02em; line-height: 1; }
-.mark svg { width: 35px; height: 35px; }
-.s { font-family: var(--serif); font-weight: 400; letter-spacing: -.03em; line-height: 1.02; text-wrap: balance; max-width: 880px; }
-.post .s { font-size: 86px; }
-.story .s { font-size: 86px; }
-.s em { font-style: italic; letter-spacing: -.02em; }
-
-.light { color: var(--cream); }
-.light .s { text-shadow: 0 2px 30px rgba(0, 0, 0, .18); }
-.light .s em { color: var(--mint); }
-.dark { color: var(--ink); }
-.dark .s em { color: var(--forest-deep); }
-.dark .mark svg { color: #2C4E25; }
-
-/* optional soft veil behind the text when a photo's negative space is busy */
-.veil { position: absolute; z-index: 1; left: 0; right: 0; height: 760px; pointer-events: none; }
-.post .veil { top: 0; }
-.story .veil { top: 180px; }
-.veil.light { background: radial-gradient(120% 85% at 30% 30%, rgba(10, 18, 9, .42), rgba(10, 18, 9, 0) 70%); }
-.veil.dark { background: radial-gradient(120% 85% at 30% 30%, rgba(255, 252, 247, .62), rgba(255, 252, 247, 0) 70%); }
-.veil.dark.right { background: radial-gradient(110% 80% at 74% 26%, rgba(255, 252, 247, .7), rgba(255, 252, 247, 0) 68%); }
-.veil.light.right { background: radial-gradient(110% 80% at 74% 26%, rgba(10, 18, 9, .42), rgba(10, 18, 9, 0) 68%); }
-
-/* carousel swipe cue: a quiet arrow on cards 1-4 */
-.next { position: absolute; z-index: 2; right: 64px; bottom: 64px; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; backdrop-filter: blur(10px); }
-.next svg { width: 34px; height: 34px; }
-.next.light { background: rgba(28, 49, 24, .55); color: var(--cream); }
-.next.dark { background: rgba(255, 252, 247, .72); color: #2C4E25; }
-</style>
+<title>Optimal round 3 renderer</title>
+<link rel="stylesheet" href="oneline.css">
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="sym" viewBox="0 0 864 864"><g fill="currentColor"><circle cx="177" cy="422" r="145"/><circle cx="318" cy="147" r="115"/><circle cx="309" cy="707" r="124"/><circle cx="599" cy="146" r="92"/><circle cx="598" cy="707" r="101"/><circle cx="757" cy="329" r="74"/><circle cx="757" cy="515" r="74"/></g></symbol>
-    <symbol id="arr" viewBox="0 0 24 24"><path d="M4.5 12h14M13 6.5l5.5 5.5-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  </defs>
-</svg>
 <div id="root"></div>
+<script>window.ROUND = { data: "R3", dir: "r3" };</script>
 <script src="round3.js"></script>
-<script>
-(function () {
-  const md = s => String(s).replace(/\|/g, "<br>").replace(/\{(.+?)\}/g, '<span class="nw">$1</span>').replace(/\*(.+?)\*/g, "<em>$1</em>");
-  const use = id => `<svg aria-hidden="true"><use href="#${id}"/></svg>`;
-  const frame = (a, f) => {
-    const size = f === "post" ? "4x5" : "9x16";
-    const out = a.card ? `r3/${a.svc}/${a.id}_card${a.card}` : `r3/${a.svc}/${a.id}_${size}`;
-    return `<div class="frame ${f}" data-out="${out}">
-      <div class="bg"><img src="assets/r3/${a.img}_${size}.jpg" style="object-position:${(a.pos && a.pos[f]) || "50% 50%"}"></div>
-      ${a.veil ? `<div class="veil ${a.tone} ${a.align || ""}"></div>` : ""}
-      <div class="txt ${a.tone} ${a.align || ""} ${a.box ? "box" : ""} ${(a.at && a.at[f]) || ""}" style="${f === "story" && a.st ? `top:${a.st}px;` : ""}${a.w ? `max-width:${a.w}px;${a.align === "right" ? "left:auto" : a.align === "center" ? "margin:0 auto" : ""}` : ""}"><span class="mark">${use("sym")}Optimal</span><h2 class="s" style="${a.fs ? `font-size:${a.fs}px` : ""}">${md(a.s)}</h2></div>
-      ${a.card && a.card < 5 ? `<span class="next ${a.tone === "light" ? "light" : "dark"}">${use("arr")}</span>` : ""}
-    </div>`;
-  };
-  const only = new URLSearchParams(location.search).get("only");
-  document.getElementById("root").innerHTML = window.R3
-    .filter(a => !only || only.split(",").includes(a.id))
-    .map(a => a.card ? frame(a, "post") : frame(a, "post") + frame(a, "story")).join("");
-})();
-</script>
+<script src="oneline.js"></script>
 </body>
 </html>

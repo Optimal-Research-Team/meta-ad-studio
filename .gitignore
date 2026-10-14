@@ -17,3 +17,4 @@ __pycache__/
 
 # Higgsfield raw downloads (rebuild assets/r2 with static/gen/prep.py)
 static/gen/*.png
+!static/gen/LB5_9x16_shoe.png

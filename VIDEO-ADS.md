@@ -75,6 +75,8 @@ Brain fog, broken sleep, mood changes, cycles that have suddenly shifted. You do
 
 Our NP-led menopause and perimenopause program in Barrie starts within days, with labs and a 60-minute visit with the same NP every time. Your first step is a free 15-minute call. No referral needed.
 
+It's a private program: $895 + HST for the first 3 months, and your bloodwork is OHIP-covered.
+
 **Headline:** Menopause care in Barrie · **Alt headline:** You don't need a diagnosis · **Description:** Free 15-min call · No referral
 
 ---

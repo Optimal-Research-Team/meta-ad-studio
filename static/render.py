@@ -3,13 +3,20 @@
 python3 render.py                   # every round-1 ad (ads.html)
 python3 render.py M1 L3             # only these
 python3 render.py --page round2     # round 2: one sentence per image (round2.html)
+python3 render.py --page round3     # round 3: Ad Lab AI concepts (round3.html)
 
 Writes out/<meno|long>/<ID>_4x5.png (1080x1350, feed) and <ID>_9x16.png (1080x1920, Stories/Reels),
 plus out/_sheet.jpg. QA fails loudly if text spills out of a frame or, on 9:16, out of the
 Reels safe zone (top 269px / bottom 672px / sides 65px).
+
+One-sentence pages (round2/round3) also get a contrast check: each frame is re-shot with the sentence
+hidden, and the text colours are measured against the real pixels behind the sentence (worst 10%).
+Below 3:1 fails (WCAG AA for large text); below 4.5:1 is reported as a warning.
 """
+import io
 import asyncio, os, sys
 from PIL import Image
+import numpy as np
 from playwright.async_api import async_playwright
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -35,9 +42,44 @@ QA_JS = """(f) => {
 }""" % (TOP, BOTTOM, SIDE, SIDE)
 
 
+def lum(rgb):
+    c = np.asarray(rgb, dtype=np.float64) / 255.0
+    c = np.where(c <= 0.03928, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
+    return c[..., 0] * 0.2126 + c[..., 1] * 0.7152 + c[..., 2] * 0.0722
+
+
+def parse_rgb(css):
+    return [int(float(x)) for x in css[css.index("(") + 1:css.index(")")].split(",")[:3]]
+
+
+async def contrast(pg, el):
+    """Worst-case contrast of the sentence (and its italic accent) against the pixels behind it."""
+    info = await pg.evaluate("""(f) => {
+      const s = f.querySelector('.s'); if (!s) return null;
+      const fr = f.getBoundingClientRect(), r = s.getBoundingClientRect(), em = s.querySelector('em');
+      return { box: [r.left - fr.left, r.top - fr.top, r.right - fr.left, r.bottom - fr.top],
+               colors: [getComputedStyle(s).color].concat(em ? [getComputedStyle(em).color] : []) };
+    }""", el)
+    if not info:
+        return None
+    await pg.evaluate("f => f.querySelectorAll('.s').forEach(s => s.style.visibility = 'hidden')", el)
+    bg = Image.open(io.BytesIO(await el.screenshot())).convert("RGB")
+    await pg.evaluate("f => f.querySelectorAll('.s').forEach(s => s.style.visibility = '')", el)
+    x0, y0, x1, y1 = [int(v) for v in info["box"]]
+    L = lum(np.array(bg.crop((max(0, x0 - 8), max(0, y0 - 8), x1 + 8, y1 + 8)))).ravel()
+    worst = 99.0
+    for col in info["colors"]:
+        lt = float(lum(np.array([[parse_rgb(col)]]))[0, 0])
+        lb = np.percentile(L, 90) if lt > np.median(L) else np.percentile(L, 10)   # brightest bg for light text, darkest for dark
+        hi, lo = max(lt, lb), min(lt, lb)
+        worst = min(worst, (hi + 0.05) / (lo + 0.05))
+    return round(worst, 2)
+
+
 async def main(only, page="ads"):
     q = ("?only=" + ",".join(only)) if only else ""
     problems = []
+    warns = []
     shots = []
     async with async_playwright() as p:
         b = await p.chromium.launch()
@@ -55,12 +97,21 @@ async def main(only, page="ads"):
             await el.scroll_into_view_if_needed()
             await el.screenshot(path=path)
             issues = await pg.evaluate(QA_JS, el)
+            cr = await contrast(pg, el)
+            if cr is not None:
+                if cr < 3.0:
+                    issues.append(f"text contrast {cr}:1 is below 3:1")
+                elif cr < 4.5:
+                    warns.append(f"{out}: contrast {cr}:1 (passes large-text AA, below 4.5:1)")
             for i in issues:
                 problems.append(f"{out}: {i}")
             shots.append(path)
             print("ok" if not issues else "!!", out)
         await b.close()
     sheet(shots, os.path.join(OUT, "_sheet.jpg" if page == "ads" else f"_sheet_{page}.jpg"))
+    if warns:
+        print("\nContrast warnings:")
+        print("\n".join("  " + x for x in warns))
     if problems:
         print("\nQA problems:")
         print("\n".join("  " + x for x in problems))

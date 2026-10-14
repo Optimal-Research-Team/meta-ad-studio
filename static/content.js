@@ -37,7 +37,7 @@ window.ADS = [
       { l: "Foundation Program", s: "Months 1–3 · labs, InBody, {60-min} NP intake, {2 follow-ups}", p: "$895", u: "+ HST" },
       { l: "Ongoing Care", s: "From month 4 · {3 NP visits a year}, prescriptions managed", p: "$795", u: "/ yr" }
     ],
-    note: "Bloodwork is OHIP-covered. NP receipts may be claimable on extended health plans.",
+    note: "Bloodwork is OHIP-covered. No referral needed.",
     cta: CALL
   },
   {
@@ -73,7 +73,7 @@ window.ADS = [
     id: "L1", svc: "long", t: "ledger", tag: "Longevity membership",
     eb: "Optimal membership · Barrie",
     h: "One price. *Everything* included.",
-    items: ["Your own Nurse Practitioner", "Unlimited in-person &amp; virtual visits", "Annual 60-min longevity assessment", "Advanced biomarker panel", "InBody scan every 90 days", "Written 12-month health plan", "Care coordinator &amp; secure messaging"],
+    items: ["Your own Nurse Practitioner", "Unlimited in-person &amp; virtual visits", "Yearly 60-min assessment + advanced labs", "InBody body scan every 90 days", "Written 12-month health plan", "Care coordinator &amp; secure messaging"],
     storyItems: ["Your own Nurse Practitioner", "Unlimited in-person &amp; virtual visits", "Annual longevity assessment + labs", "InBody scan every 90 days", "Written 12-month health plan"],
     price: "$1,495", per: "/ year", daily: "About $4 a day, everything included", chip: "HSA eligible",
     cta: CALL

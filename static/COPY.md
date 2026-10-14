@@ -14,12 +14,12 @@ Copy lives in `content.js` and layouts live in `ads.html`. The QA step fails the
 | | Menopause | Longevity membership |
 |---|---|---|
 | Destination | `https://www.beoptimal.ca/services/menopause-and-perimenopause-care` | `https://www.beoptimal.ca/membership` |
-| URL parameters | `utm_source=meta&utm_medium=paid&utm_campaign=opt-a-q4&utm_content={{ad.name}}` | `utm_source=meta&utm_medium=paid&utm_campaign=opt-b-q4&utm_content={{ad.name}}` |
+| URL parameters | `utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}` | `utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}` |
 | Ad names | `M1` … `M6` | `L1` … `L6` |
 | Audience | Women 35–60, about 40 km around Barrie, no interests (broad) | Adults 35–70, about 40 km around Barrie, broad |
 | CTA button | Book now | Book now |
 
-- **Keep UTM values neutral.** Meta restricts health advertisers whose URLs or events reveal a condition, so never put words like "menopause" in a parameter.
+- **URL parameters are id-based** (the same scheme the live ads use). Ad Lab joins every booking to its ad by `ad.id`, and ids never change when an ad is renamed. They're also neutral: Meta restricts health advertisers whose URLs name a condition.
 - **Put all 6 ads in one ad set per service.** Each concept is a different format (list, stat, price card, photo, diagram, objection), so Meta's similarity grouping (Andromeda) treats them as separate creatives. Let it allocate the spend, and judge after 7 days.
 - **Optimization:** health advertisers mostly can't optimize on website bookings anymore. Run Landing page views as the baseline and test an Instant Form ("Request your free intro call", with one qualifying question) against it.
 
@@ -33,6 +33,8 @@ Perimenopause is more than hot flashes. 3 a.m. wake-ups, brain fog, joint aches 
 
 Our NP-led program in Barrie starts with comprehensive labs and a 60-minute visit, and you can start within days.
 
+It's a private program: $895 + HST for the first 3 months, and your bloodwork is OHIP-covered.
+
 Book your free 15-minute call. No referral needed.
 
 **Headline:** More than hot flashes · **Description:** Free 15-min call · No referral
@@ -42,6 +44,8 @@ Book your free 15-minute call. No referral needed.
 60 minutes. That's your first visit with our Nurse Practitioner: one-on-one, once your labs are back, with time to tell the whole story.
 
 Then follow-ups at weeks 6 and 12 with the same NP. Bloodwork is OHIP-covered.
+
+It's a private program: $895 + HST for the first 3 months, and your bloodwork is OHIP-covered.
 
 Book your free 15-minute call. No referral needed.
 
@@ -65,6 +69,8 @@ No referral and no family doctor needed. Menopause and perimenopause care in Bar
 
 You can start within days, and you see the same NP at every visit.
 
+It's a private program: $895 + HST for the first 3 months, and your bloodwork is OHIP-covered.
+
 Book your free 15-minute call.
 
 **Headline:** No referral needed · **Description:** Start within days in Barrie
@@ -76,6 +82,8 @@ Here's exactly how it works:
 2. Months 1–3: labs, a body scan, a 60-minute NP visit and 2 follow-ups.
 3. Ongoing care with the same NP, 3 visits a year.
 
+It's a private program: $895 + HST for the first 3 months, and your bloodwork is OHIP-covered.
+
 No referral needed. Book your free call.
 
 **Headline:** A clear plan, start to finish · **Description:** Free 15-min call · No referral
@@ -85,6 +93,8 @@ No referral needed. Book your free call.
 3 a.m. Wide awake. Again.
 
 Night sweats and broken sleep are common in perimenopause, and they're treatable. Our NP-led program in Barrie starts with labs and a 60-minute visit, and you can start within days.
+
+It's a private program: $895 + HST for the first 3 months, and your bloodwork is OHIP-covered.
 
 Book your free 15-minute call. No referral needed.
 

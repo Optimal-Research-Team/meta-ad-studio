@@ -15,9 +15,22 @@ def cover(im, w, h, ay=0.5):
     return im.crop((x, y, x + w, y + h))
 
 
+# 9:16 only: push the art down (px) where the sentence would touch it; the top band is mirrored paper.
+SHIFT9 = {"LA2": 120}
+
+
+def shift_down(im, n):
+    w, h = im.size
+    out = Image.new("RGB", (w, h))
+    out.paste(im.crop((0, 0, w, h - n)), (0, n))
+    out.paste(im.crop((0, 0, w, n)).transpose(Image.FLIP_TOP_BOTTOM), (0, 0))
+    return out
+
+
 for k in ("MA1", "MA2", "LA1", "LA2"):
     cover(Image.open(os.path.join(SRC, f"{k}.png")).convert("RGB"), 1080, 1350).save(os.path.join(OUT, f"{k}_4x5.jpg"), quality=92, subsampling=0)
     s9 = os.path.join(SRC, f"{k}_9x16.png")
     if os.path.exists(s9):
-        cover(Image.open(s9).convert("RGB"), 1080, 1920).save(os.path.join(OUT, f"{k}_9x16.jpg"), quality=92, subsampling=0)
+        im9 = cover(Image.open(s9).convert("RGB"), 1080, 1920)
+        (shift_down(im9, SHIFT9[k]) if k in SHIFT9 else im9).save(os.path.join(OUT, f"{k}_9x16.jpg"), quality=92, subsampling=0)
 print(sorted(os.listdir(OUT)))
