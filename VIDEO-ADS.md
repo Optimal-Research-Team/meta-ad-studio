@@ -1,12 +1,13 @@
 # Video ads, Oct 12, 2026: Meta ads + Instagram
 
-There are three ads, all shot with Cheryl Cairns (care coordinator) at the clinic:
+There are four ads. LV1, LV2 and MV1 were shot with Cheryl Cairns (care coordinator), and LV3 (added Oct 15) with Rubeana Deol, NP (Clinical Director):
 
 | ID | Ad | Meta ad cuts | Instagram reel |
 |---|---|---|---|
 | **LV1** | Longevity, "3 things to know before you book." | LV1-T, 35.3 s | Tight, 35.3 s |
 | **LV2** | Longevity, "A full hour. Every year." | LV2-T, 36.5 s | Tight, 36.5 s |
 | **MV1** | Menopause, "I just don't feel like myself." | MV1-T, 33.8 s (music only on the end card) | Tight, 33.8 s |
+| **LV3** | Longevity, "An hour with an NP who listens." (Oct 15) | LV3-T | n/a (Meta ad only) |
 
 The two sets differ only in the end card. The **Meta ad** end card says "Book your free intro call", because Meta's own *Book now* button carries the click. The **Instagram** end card says "Comment LONGEVITY" / "Comment MENOPAUSE" instead, because a button drawn on an organic reel can't be tapped and the keyword triggers the existing auto-DM.
 
@@ -23,7 +24,7 @@ Only the Tight cuts run as Meta ads (Peter, Oct 12). The Full cuts stay in `out/
 | | LV2 Longevity | MV1 Menopause |
 |---|---|---|
 | Ad set | The Longevity membership ad set (alongside L1–L6 / LB1–LB6) | The Menopause ad set (alongside M1–M6 / MB1–MB6) |
-| Ad names | `LV1-T`, `LV2-T` | `MV1-T` |
+| Ad names | `LV1-T`, `LV2-T`, `LV3-T` | `MV1-T` |
 | Destination | `https://www.beoptimal.ca/membership` | `https://www.beoptimal.ca/services/menopause-and-perimenopause-care` |
 | URL parameters | `utm_source=meta&utm_medium=paid&utm_campaign=opt-b-q4&utm_content={{ad.name}}` | `utm_source=meta&utm_medium=paid&utm_campaign=opt-a-q4&utm_content={{ad.name}}` |
 | CTA button | Book now | Book now |
@@ -62,6 +63,20 @@ Every Optimal member gets an annual longevity assessment: 60 minutes on your lab
 $1,495 a year, about $4 a day, everything included. We cap membership so visits stay unhurried. Book a free 15-minute intro call.
 
 **Headline:** A full hour. Every year. · **Description:** About $4 a day, all included
+
+### LV3 · Longevity · "An hour with an NP who listens."
+
+**Primary text (short)**
+Want to optimize your health? Every Optimal member gets a one-hour annual physical with a Nurse Practitioner who listens, then labs to check the biomarkers that matter. Book a free 15-minute intro call.
+
+**Primary text (long)**
+Optimizing your health starts with an hour.
+
+Every Optimal member gets a one-hour annual physical with their Nurse Practitioner: a detailed assessment, then labs to check the biomarkers that matter for your overall health.
+
+$1,495 a year, about $4 a day, everything included. We cap membership so visits stay unhurried. Book a free 15-minute intro call. No commitment.
+
+**Headline:** An hour with an NP who listens · **Description:** About $4 a day, all included
 
 ### MV1 · Menopause · "I just don't feel like myself."
 

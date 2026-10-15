@@ -185,7 +185,7 @@ def _balanced(ws, keep=KEEP):
         if len(part) == 1 and len(ws) > 1:
             c += 250
         if nxt is not None and (_bare(part[-1]), _bare(nxt)) in keep:
-            c += 300
+            c += 500                                     # outranks a dangling stop word (400)
         return c
     n = len(ws)
     best, back = [0.0] + [1e18] * n, [0] * (n + 1)
@@ -200,14 +200,17 @@ def _balanced(ws, keep=KEEP):
     return parts[::-1]
 
 
-def chunks(otoks, keep=KEEP):
+def chunks(otoks, keep=KEEP, flow=()):
+    """flow: (segA, segB) pairs whose cut only removed a pause, so a phrase may run across it."""
+    flow = set(flow)
     """Phrases break at punctuation and at every cut; each phrase is split into balanced one-line chunks."""
     phrases, cur = [], []
     for i, t in enumerate(otoks):
         cur.append(t)
         nxt = otoks[i + 1] if i + 1 < len(otoks) else None
         lone_comma = t["text"][-1] == "," and len(cur) == 1     # "Hi," alone would flash for a few frames
-        if (t["text"][-1] in ",.:;?!" and not lone_comma) or nxt is None or nxt["seg"] != t["seg"]:
+        cut = nxt is not None and nxt["seg"] != t["seg"] and (t["seg"], nxt["seg"]) not in flow
+        if (t["text"][-1] in ",.:;?!" and not lone_comma) or nxt is None or cut:
             phrases.append(cur); cur = []
     out = []
     for ph in phrases:
@@ -357,7 +360,7 @@ def render(spec, variant):
     toks = words(work, silences(src, work), spec.FIX)
     track = face_track(work)
     segs, body = timeline(spec, variant)
-    chs = chunks(to_out(segs, toks), KEEP | set(getattr(spec, "KEEP", ())))
+    chs = chunks(to_out(segs, toks), KEEP | set(getattr(spec, "KEEP", ())), getattr(spec, "FLOW", ()))
     tag = f"{spec.NAME}_{variant}"
     write_srt(chs, os.path.join(out_dir, f"{tag}.srt"))
     grade = getattr(spec, "GRADE", DEFAULT_GRADE)
@@ -369,6 +372,18 @@ def render(spec, variant):
     caps = G.Captions(chs, getattr(spec, "EMPH", ()))
     hook = G.hook(spec.HOOK["eyebrow"], spec.HOOK["lines"], top=spec.HOOK.get("top", 290), size=spec.HOOK.get("size", 74))
     hook_until = spec.HOOK.get("until", 3.4)
+    def src_to_out(t):
+        """Source time -> output time (start of the next kept segment if t falls in a cut)."""
+        for g in segs:
+            if t < g["s"]:
+                return g["o"]
+            if t <= g["e"]:
+                return g["o"] + t - g["s"]
+        return body
+    cards = [(src_to_out(c["at"][0]), src_to_out(c["at"][1]),
+              G.card(c["img"], c["eyebrow"], c["lines"], top=c.get("top", 300)))
+             for c in getattr(spec, "CARDS", [])]
+    cap_y = getattr(spec, "CAP_Y", G.CAP_Y)
     chips = []
     for names, num, text in spec.TAGS:
         gs = [g for g in segs if g["name"] in names]
@@ -400,7 +415,11 @@ def render(spec, variant):
                 if a <= t < b:
                     u_in, u_out = (t - a) / 0.3, (b - t) / 0.18
                     chp.draw(fr, G.ease_out(u_in) * min(u_out, 1), -10 * (1 - G.ease_out(u_in)))
-            caps.draw(fr, t)
+            for a, b, crd in cards:                         # engraving cards slide down in, fade out
+                if a <= t < b:
+                    u_in, u_out = (t - a) / 0.35, (b - t) / 0.25
+                    crd.draw(fr, G.ease_out(u_in) * min(u_out, 1), -16 * (1 - G.ease_out(u_in)))
+            caps.draw(fr, t, cap_y)
             f45 = fr.crop((0, win45[0], W, win45[1]))
             tau = t - (body - XFADE_END)
             if tau > 0:
@@ -507,6 +526,7 @@ def cover(spec):
             G.draw_run(d, x, bl, txt, f, mint if it else G.CREAM)
             x += G.run_width(f, txt)
     fr = grain(fr)
+    os.makedirs(out_dir, exist_ok=True)
     base = os.path.join(out_dir, f"{spec.NAME}_cover")
     fr.save(base + "_9x16.jpg", quality=94, subsampling=0)
     fr.crop((0, (H - 1440) // 2, W, (H + 1440) // 2)).save(base + "_grid-3x4-preview.jpg", quality=90)

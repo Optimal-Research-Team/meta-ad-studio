@@ -118,6 +118,36 @@ def chip(num, text, cy=CHIP_Y):
     return Panel((W - pw) / 2, cy - ph / 2, pw, ph, ph / 2, spr)
 
 
+MINT = (164, 194, 157)
+ENGRAVINGS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "brand", "engravings")
+
+
+def card(img, eyebrow, lines, top=300, size=52, img_h=240, width=944):
+    """Engraving card for explainer videos: a frosted panel with a cream engraving on the left and an eyebrow and a
+    Castoro title (italic runs in mint) on the right. img: file name in brand/engravings or a path."""
+    path = img if os.path.isabs(img) else os.path.join(ENGRAVINGS, img)
+    art = Image.open(path).convert("RGBA")
+    art = art.crop(art.getbbox())
+    art = art.resize((round(art.width * img_h / art.height), img_h), Image.LANCZOS)
+    ef, lh, pad = public(22, 700), int(size * 1.1), 34
+    tw = [sum(run_width(castoro(size, it), t) for t, it in ln) for ln in lines]
+    pw = max(width, int(pad * 3 + art.width + max(tw)))
+    block = 30 + 16 + len(lines) * lh
+    ph = int(max(img_h + 2 * pad, block + 2 * pad))
+    spr = Image.new("RGBA", (pw, ph), (0, 0, 0, 0))
+    spr.alpha_composite(art, (pad, (ph - img_h) // 2))
+    d = ImageDraw.Draw(spr)
+    x0, y = pad * 2 + art.width, (ph - block) / 2
+    draw_run(d, x0, y + 22, eyebrow, ef, MINT + (255,), extra=22 * 0.16)
+    for i, ln in enumerate(lines):
+        x, bl = x0, y + 30 + 16 + (i + 1) * lh - 10
+        for t, it in ln:
+            f = castoro(size, it)
+            draw_run(d, x, bl, t, f, (MINT if it else CREAM) + (255,))
+            x += run_width(f, t)
+    return Panel((W - pw) / 2, top, pw, ph, 36, spr)
+
+
 # ------------------------------------------------------------------ captions
 def _disp(text, last):
     t = text.replace("'", "’")
